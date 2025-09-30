@@ -1,0 +1,21 @@
+//MYACBGEN JOB FB3,,REGION=0M,NOTIFY=&SYSUID
+//*
+//*   MY IMS ACBGEN JOB
+//*
+//SETLIB   JCLLIB ORDER=DFSF10.PROCLIB
+//*
+// EXPORT SYMLIST=(*)
+// SET MYPSB='IVPPSB1'                                   MY PSB NAME
+//*
+//STEP1    EXEC ACBGEN
+//*
+//G.IMS      DD DISP=SHR,DSN=&SYSUID..IMS.PSBLIB             MY PSBs
+//           DD DISP=SHR,DSN=&SYSUID..IMS.DBDLIB             MY DBDs
+//           DD DISP=SHR,DSN=DFSF10.PSBLIB                  IMS PSBs
+//           DD DISP=SHR,DSN=DFSF10.DBDLIB                  IMS DBDs
+//*
+//G.IMSACB   DD  DISP=SHR,DSN=&SYSUID..IMS.ACBLIB            MY ACBs
+//*
+//G.SYSIN DD  *,SYMBOLS=CNVTSYS
+  BUILD PSB=&MYPSB
+/*
