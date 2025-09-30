@@ -9,6 +9,7 @@ propertyGroups:
       - name: proclib
         type: mvs
         locations:
+          - 'Z45864.IMS.PROCLIB'
           - 'DFSF10.PROCLIB'
           - 'VENDOR.PROCLIB'
           - 'SYS1.PROCLIB'
