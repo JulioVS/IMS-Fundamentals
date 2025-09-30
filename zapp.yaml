@@ -1,0 +1,23 @@
+name: IBM Z & Zowe Property Groups
+description: >-
+  https://ibm.github.io/zopeneditor-about/Docs/setting_propertygroup.html
+author: IBM Z Open Editor
+propertyGroups:
+  - name: jcl-proclibs
+    language: jcl
+    libraries:
+      - name: proclib
+        type: mvs
+        locations:
+          - 'DFSF10.PROCLIB'
+          - 'VENDOR.PROCLIB'
+          - 'SYS1.PROCLIB'
+  - name: hlasm-maclibs
+    language: hlasm
+    libraries:
+      - name: maclib
+        type: mvs
+        locations:
+          - 'DFSF10.SDFSMAC'
+          - 'SYS1.MACLIB'
+          
