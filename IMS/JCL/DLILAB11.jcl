@@ -1,4 +1,4 @@
-//MYDLISK1  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
+//DLILAB11  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
 //*
 //*   IMS DL/I TEST PROGRAM 'DFSDDLT0'
 //*
@@ -6,7 +6,7 @@
 //*
 //IMSDLI   EXEC DLIBATCH,
 //             MBR='DFSDDLT0',                     DL/I TEST PROGRAM
-//             PSB='PSBCBL',                              MY OWN PSB
+//             PSB='PSB1CBL',                             MY OWN PSB
 //             DBRC='N',                                   NO RECON!
 //             IRLM='N'                                    NO LOCKS!
 //*

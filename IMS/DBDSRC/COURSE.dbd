@@ -1,0 +1,16 @@
+***********************************************************************
+*                                                                     *
+*---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+         DBD   NAME=COURSE,ACCESS=HDAM,RMNAME=(DFSHDC40,2,20,1000)
+         DATASET DD1=COURSE
+         SEGM  NAME=COURSE,PARENT=0,BYTES=30
+         FIELD NAME=(CODE,SEQ),BYTES=4,START=1
+         SEGM  NAME=NAME,PARENT=COURSE,BYTES=30
+         FIELD NAME=LASTNM,BYTES=5,START=5
+         SEGM  NAME=EXPR,PARENT=NAME,BYTES=30
+         FIELD NAME=(CLASSIF,SEQ),BYTES=3,START=17
+         SEGM  NAME=EDUC,PARENT=NAME,BYTES=60
+         FIELD NAME=DEGREE,BYTES=3,START=54
+         DBDGEN
+         FINISH
+         END

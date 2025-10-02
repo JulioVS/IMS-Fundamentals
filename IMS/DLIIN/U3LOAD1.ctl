@@ -1,0 +1,25 @@
+S 1 1 1 1 1    COURSE
+U
+L        ISRT  COURSE
+L        DATA  CM17                   SEGM #1
+U
+L        ISRT  NAME
+L        DATA  JAKEADAMS              SEGM #2
+L        ISRT  EXPR
+L        DATA  SOME EXPERIENCE CB3    SEGM #3
+U
+L        ISRT  NAME
+L        DATA  CARLJONES              SEGM #4
+L        ISRT  EXPR
+L        DATA  SOME EXPERIENCE AL5    SEGM #5
+L        ISRT  EXPR
+L        DATA  SOME EXPERIENCE CB4    SEGM #6
+L        ISRT  EDUC
+L        DATA  SOME EDUCATION         SEGM #7                       MBA
+U
+L        ISRT  NAME
+L        DATA  MARYSMITH              SEGM #8
+L        ISRT  EXPR
+L        DATA  SOME EXPERIENCE PL3    SEGM #9
+L        ISRT  EDUC
+L        DATA  SOME EDUCATION         SEGM #10                      BBA
