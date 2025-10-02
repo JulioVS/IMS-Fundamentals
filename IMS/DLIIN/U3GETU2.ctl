@@ -1,0 +1,10 @@
+S 1 1 1 1 1    COURSE
+U Call 4A
+L        GU
+U Call 4B
+L        GU    EXPR    (CLASSIF = CB4)
+U Call 4C
+L        GU    EXPR    (CLASSIF = CB3)
+U Call 4D
+L        GU    COURSE  (CODE    = CM17)                                X
+L              EDUC    (DEGREE  = MBA)

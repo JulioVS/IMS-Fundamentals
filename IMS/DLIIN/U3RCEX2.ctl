@@ -1,0 +1,31 @@
+S 1 1 1 1 1    COURSE
+U Call 9A
+L        GU    COURSE  (CODE    = CM17)
+U Call 9B
+L        GN    EXPR    (CLASSIF = CB4)
+U Call 9C
+L        GN
+U Call 9D
+L        GN
+U Call 9E
+L        GN
+U Call 9F
+L        GN
+U Call 10A
+L        GU    COURSE  (CODE    = CM17)
+U Call 10B
+L        GN    NAME
+U Call 10C
+L        GN    NAME
+U Call 10D
+L        GN    NAME
+U Call 10E
+L        GN    NAME
+U Call 11A
+L        GU    COURSE  (CODE    = CM17)
+U Call 11B
+L        GNP   EXPR
+U Call 11C
+L        GNP
+U Call 11D
+L        GNP

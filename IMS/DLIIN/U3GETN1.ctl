@@ -1,3 +1,25 @@
 S 1 1 1 1 1    COURSE
-L        GU    COURSE
-L   0010 GN
+U Call 1A
+L        GN
+U Call 1B
+L        GN
+U Call 1C
+L        GN
+U Call 1D
+L        GN
+U Call 1E
+L        GN
+U Call 1F
+L        GN
+U Call 1G
+L        GN
+U Call 1H
+L        GN
+U Call 1I
+L        GN
+U Call 1J
+L        GN
+U Call 1K
+L        GN
+U Call 1L
+L        GN
