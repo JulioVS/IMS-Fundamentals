@@ -1,0 +1,34 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 15.01.03.08 DATE= 25.276
+
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0002 OF 0002  PCB SELECTED =           DBD SELECTED = COURSE
+ COMMENTS                                                                                 C  TIME=15.01.03.09 DATE=25.276
+ COMMENTS                --- Assume 'UPDATE' mode ---                                     C  TIME=15.01.03.09 DATE=25.276
+ COMMENTS                   (Use Procopt "A" PSB!)                                        C  TIME=15.01.03.09 DATE=25.276
+ COMMENTS                                                                                 C  TIME=15.01.03.09 DATE=25.276
+ COMMENTS                --- Assume SG#1-5 exist  ---                                     C  TIME=15.01.03.09 DATE=25.276
+ COMMENTS                     (Fully loaded DB)                                           C  TIME=15.01.03.09 DATE=25.276
+ COMMENTS                                                                                 C  TIME=15.01.03.09 DATE=25.276
+ COMMENTS   Call 12                                                                       C  TIME=15.01.03.09 DATE=25.276
+ ........................................................................................................................
+ CALL=DLET
+
+    NO SEGMENT RETURNED.
+
+ DBPCB   LEV=00  SEG=          RET CODE=DJ  KFDB LEN=0000
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         0         0         0         0         1         0         1
+ TOTAL NUMBER OF CALLS =         1  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 15.01.03.09 DATE= 25.276
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

@@ -1,0 +1,42 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 13.01.58.96 DATE= 25.276
+
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0004 OF 0004  PCB SELECTED =           DBD SELECTED = COURSE
+ COMMENTS                                                                                 C  TIME=13.01.58.97 DATE=25.276
+ COMMENTS                --- Assume 'LOAD' mode ---                                       C  TIME=13.01.58.97 DATE=25.276
+ COMMENTS                  (Re-create VSAM first)                                         C  TIME=13.01.58.97 DATE=25.276
+ COMMENTS                                                                                 C  TIME=13.01.58.97 DATE=25.276
+ COMMENTS                --- Assume SG#1 exists ---                                       C  TIME=13.01.58.97 DATE=25.276
+ COMMENTS                      (Re-create it)                                             C  TIME=13.01.58.97 DATE=25.276
+ COMMENTS   Call 1A                                                                       C  TIME=13.01.58.97 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=COURSE
+
+ SEGMENT     =(CM17                   SEGM #1                          )
+
+ DBPCB   LEV=01  SEG=COURSE    RET CODE=    KFDB LEN=0004  KEY FDB=(CM17)
+ COMMENTS                --------------------------                                       C  TIME=13.02.00.52 DATE=25.276
+ COMMENTS   Call 5                                                                        C  TIME=13.02.00.52 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
+               SEG=EXPR
+
+ SEGMENT     =(SOME EXPERIENCE AL5    SEGM #3                          )
+
+ DBPCB   LEV=01  SEG=COURSE    RET CODE=LD  KFDB LEN=0004  KEY FDB=(CM17)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         0         0         0         2         0         0         2
+ TOTAL NUMBER OF CALLS =         2  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSBLOAD   STOP TIME= 13.02.00.52 DATE= 25.276
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

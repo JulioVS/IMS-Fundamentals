@@ -1,0 +1,4 @@
+      ----------------------------------------------------------
+       I can't manipulate the IOAREA from here, so this exercise
+       cannot be done by using the DL/I Test program!
+      ----------------------------------------------------------

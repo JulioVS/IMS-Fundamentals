@@ -1,0 +1,13 @@
+S 1 1 1 1 1    COURSE
+U
+U              --- Assume 'UPDATE' mode ---
+U                 (Use Procopt "A" PSB!)
+U
+U              --- Assume SG#1-5 exist  ---
+U                   (Fully loaded DB)
+U
+U Call 14A
+L        GHU   COURSE  (CODE    = CM17)
+U Call 14B
+L        REPL
+L        DATA  CM17    UPDATED        SEGM #1

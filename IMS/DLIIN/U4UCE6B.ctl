@@ -1,0 +1,19 @@
+S 1 1 1 1 1    COURSE
+U
+U              --- Assume 'UPDATE' mode ---
+U                 (Use Procopt "A" PSB!)
+U
+U              --- Assume SG#1-5 exist  ---
+U                   (Fully loaded DB)
+U
+U Call 11A
+L        GHU   COURSE  (CODE    = CM17)                                X
+L              NAME    (LASTNM  = JONES)
+U
+U     ----------------------------------------------------------
+U      I can't manipulate the IOAREA from here, so this exercise
+U      cannot be done by using the DL/I Test program!
+U     ----------------------------------------------------------
+U
+U Call 11B
+L        DLET

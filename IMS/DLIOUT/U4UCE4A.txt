@@ -1,0 +1,49 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 14.05.13.91 DATE= 25.276
+
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0002 OF 0002  PCB SELECTED =           DBD SELECTED = COURSE
+ COMMENTS                                                                                 C  TIME=14.05.13.92 DATE=25.276
+ COMMENTS                --- Assume 'UPDATE' mode ---                                     C  TIME=14.05.13.92 DATE=25.276
+ COMMENTS                   (Use Procopt "A" PSB!)                                        C  TIME=14.05.13.92 DATE=25.276
+ COMMENTS                                                                                 C  TIME=14.05.13.92 DATE=25.276
+ COMMENTS                --- Assume SG#1 exists ---                                       C  TIME=14.05.13.92 DATE=25.276
+ COMMENTS                (Should have root segm only!)                                    C  TIME=14.05.13.92 DATE=25.276
+ COMMENTS                                                                                 C  TIME=14.05.13.92 DATE=25.276
+ COMMENTS   Call 6A                                                                       C  TIME=14.05.13.92 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
+               SEG=NAME
+
+ SEGMENT     =(ANNAJONES              SEGM #2                          )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0009  KEY FDB=(CM17JONES)
+ COMMENTS   Call 6B                                                                       C  TIME=14.05.14.42 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=EDUC
+
+ SEGMENT     =(SOME EDUCATION         SEGM #5                       MBA)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17JONESMBA)
+ COMMENTS   Call 6C                                                                       C  TIME=14.05.14.42 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=EXPR
+
+ SEGMENT     =(SOME EXPERIENCE AL5    SEGM #3                          )
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17JONESAL5)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         0         0         0         3         0         0         3
+ TOTAL NUMBER OF CALLS =         3  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 14.05.14.42 DATE= 25.276
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

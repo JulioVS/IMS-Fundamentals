@@ -1,0 +1,41 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 16.24.11.87 DATE= 25.276
+
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0002 OF 0002  PCB SELECTED =           DBD SELECTED = COURSE
+ COMMENTS                                                                                 C  TIME=16.24.11.88 DATE=25.276
+ COMMENTS                --- Assume 'UPDATE' mode ---                                     C  TIME=16.24.11.88 DATE=25.276
+ COMMENTS                   (Use Procopt "A" PSB!)                                        C  TIME=16.24.11.88 DATE=25.276
+ COMMENTS                                                                                 C  TIME=16.24.11.88 DATE=25.276
+ COMMENTS                --- Assume SG#1-5 exist  ---                                     C  TIME=16.24.11.88 DATE=25.276
+ COMMENTS                     (Fully loaded DB)                                           C  TIME=16.24.11.88 DATE=25.276
+ COMMENTS                                                                                 C  TIME=16.24.11.88 DATE=25.276
+ COMMENTS   Call 14A                                                                      C  TIME=16.24.11.88 DATE=25.276
+ ........................................................................................................................
+ CALL=GHU      SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
+
+ SEGMENT     =(CM17                   SEGM #1)
+
+ DBPCB   LEV=01  SEG=COURSE    RET CODE=    KFDB LEN=0004  KEY FDB=(CM17)
+ COMMENTS   Call 14B                                                                      C  TIME=16.24.12.38 DATE=25.276
+ ........................................................................................................................
+ CALL=REPL
+
+ SEGMENT     =(CM17    UPDATED        SEGM #1                          )
+
+ DBPCB   LEV=01  SEG=COURSE    RET CODE=    KFDB LEN=0004  KEY FDB=(CM17)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         1         0         0         0         0         1         2
+ TOTAL NUMBER OF CALLS =         2  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 16.24.12.38 DATE= 25.276
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

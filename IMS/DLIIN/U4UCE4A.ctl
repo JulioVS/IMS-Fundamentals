@@ -1,0 +1,18 @@
+S 1 1 1 1 1    COURSE
+U
+U              --- Assume 'UPDATE' mode ---
+U                 (Use Procopt "A" PSB!)
+U
+U              ---  Assume SG#1 exists  ---
+U              (Should have root segm only!)
+U
+U Call 6A
+L        ISRT  COURSE  (CODE    = CM17)                                X
+L              NAME
+L        DATA  ANNAJONES              SEGM #2
+U Call 6B
+L        ISRT  EDUC
+L        DATA  SOME EDUCATION         SEGM #5                       MBA
+U Call 6C
+L        ISRT  EXPR
+L        DATA  SOME EXPERIENCE AL5    SEGM #3

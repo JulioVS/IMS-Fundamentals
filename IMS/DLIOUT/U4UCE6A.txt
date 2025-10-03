@@ -1,0 +1,42 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 14.47.36.92 DATE= 25.276
+
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0002 OF 0002  PCB SELECTED =           DBD SELECTED = COURSE
+ COMMENTS                                                                                 C  TIME=14.47.36.93 DATE=25.276
+ COMMENTS                --- Assume 'UPDATE' mode ---                                     C  TIME=14.47.36.93 DATE=25.276
+ COMMENTS                   (Use Procopt "A" PSB!)                                        C  TIME=14.47.36.93 DATE=25.276
+ COMMENTS                                                                                 C  TIME=14.47.36.93 DATE=25.276
+ COMMENTS                --- Assume SG#1-5 exist  ---                                     C  TIME=14.47.36.93 DATE=25.276
+ COMMENTS                     (Fully loaded DB)                                           C  TIME=14.47.36.93 DATE=25.276
+ COMMENTS                                                                                 C  TIME=14.47.36.93 DATE=25.276
+ COMMENTS   Call 10A                                                                      C  TIME=14.47.36.93 DATE=25.276
+ ........................................................................................................................
+ CALL=GHU      SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
+               SEG=NAME      FIELD=LASTNM    OPER==       VALUE=JONES)
+
+ SEGMENT     =(ANNAJONES              SEGM #2)
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0009  KEY FDB=(CM17JONES)
+ COMMENTS   Call 10B                                                                      C  TIME=14.47.37.43 DATE=25.276
+ ........................................................................................................................
+ CALL=DLET
+
+ SEGMENT     =(ANNAJONES              SEGM #2)
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0009  KEY FDB=(CM17JONES)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         1         0         0         0         1         0         2
+ TOTAL NUMBER OF CALLS =         2  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 14.47.37.43 DATE= 25.276
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+
