@@ -1,4 +1,4 @@
-//DLIUNI3L  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
+//DLIUNITL  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
 //*
 //*   IMS DL/I TEST PROGRAM 'DFSDDLT0'
 //*
@@ -24,7 +24,7 @@
 //             DCB=(RECFM=VB,BLKSIZE=4096,LRECL=4092,BUFNO=5)
 //*
 //G.PRINTDD  DD SYSOUT=*                                   FOR DLT0!
-//G.SYSIN    DD DISP=SHR,DSN=&SYSUID..IMS.DLIIN(U3LOAD1)       INPUT
+//G.SYSIN    DD DISP=SHR,DSN=&SYSUID..IMS.DLIIN(U4LOAD1)       INPUT
 //*
 //* //G.SYSIN    DD *
 //* S 1 1 1 1 1    COURSE
@@ -34,22 +34,4 @@
 //* U
 //* L        ISRT  NAME
 //* L        DATA  JAKEADAMS
-//* L        ISRT  EXPR
-//* L        DATA  SOME EXPERIENCE CB3
-//* U
-//* L        ISRT  NAME
-//* L        DATA  CARLJONES
-//* L        ISRT  EXPR
-//* L        DATA  SOME EXPERIENCE AL5
-//* L        ISRT  EXPR
-//* L        DATA  SOME EXPERIENCE CB4
-//* L        ISRT  EDUC
-//* L        DATA  SOME EDUCATION IN SOME UNIVERSITY IN SOME COUNTRY    MBA
-//* U
-//* L        ISRT  NAME
-//* L        DATA  MARYSMITH
-//* L        ISRT  EXPR
-//* L        DATA  SOME EXPERIENCE PL3
-//* L        ISRT  EDUC
-//* L        DATA  SOME EDUCATION IN SOME UNIVERSITY IN SOME COUNTRY    BBA
 //* /*

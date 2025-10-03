@@ -1,0 +1,14 @@
+S 1 1 1 1 1    COURSE
+U
+L        ISRT  COURSE
+L        DATA  CM17                   SEGM #1
+U
+L        ISRT  NAME
+L        DATA  ANNAJONES              SEGM #2
+U
+L        ISRT  EXPR
+L        DATA  SOME EXPERIENCE AL5    SEGM #3
+L        ISRT  EXPR
+L        DATA  SOME EXPERIENCE CB4    SEGM #4
+L        ISRT  EDUC
+L        DATA  SOME EDUCATION         SEGM #5                       MBA

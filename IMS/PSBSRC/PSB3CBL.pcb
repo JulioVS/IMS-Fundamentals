@@ -1,7 +1,7 @@
 ***********************************************************************
 *                                                                     *
 *---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
-         PCB    TYPE=DB,DBDNAME=COURSE,PROCOPT=GP,KEYLEN=12
+         PCB    TYPE=DB,DBDNAME=COURSE,PROCOPT=A,KEYLEN=12
          SENSEG NAME=COURSE,PARENT=0
          SENSEG NAME=NAME,PARENT=COURSE
          SENSEG NAME=EXPR,PARENT=NAME

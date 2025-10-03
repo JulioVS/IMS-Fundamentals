@@ -1,6 +1,6 @@
-//ALHIDAM1  JOB FB3,NOTIFY=&SYSUID
+//DEFHIDAM  JOB FB3,NOTIFY=&SYSUID
 //*
-//*   UTILITY JCL FOR IDCAMS  -- ALLOCATE FILES FOR 'HIDAM/OSAM' DB.-
+//*   UTILITY JCL FOR IDCAMS  -- ALLOCATE FILES FOR 'HIDAM/OSAM' DB
 //*                              KEYS => VSAM [KSDS]
 //*                              DATA => OSAM
 //*

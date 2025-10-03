@@ -1,4 +1,4 @@
-//DLIUNI31  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
+//MYDLITSA  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
 //*
 //*   IMS DL/I TEST PROGRAM 'DFSDDLT0'
 //*
@@ -6,7 +6,7 @@
 //*
 //IMSDLI   EXEC DLIBATCH,
 //             MBR='DFSDDLT0',                     DL/I TEST PROGRAM
-//             PSB='PSB3CBL',                             MY OWN PSB
+//             PSB='IVPPSB1',                             MY OWN PSB
 //             DBRC='N',                                   NO RECON!
 //             IRLM='N'                                    NO LOCKS!
 //*
@@ -15,19 +15,17 @@
 //           DD DISP=SHR,DSN=DFSF10.PSBLIB                  IMS PSBs
 //           DD DISP=SHR,DSN=DFSF10.DBDLIB                  IMS DBDs
 //*
-//G.COURSE   DD DISP=SHR,DSN=&SYSUID..IMS.COURSE      MY DATA [VSAM]
+//G.DFSIVD1  DD DISP=SHR,DSN=&SYSUID..IMS.IVPDB1      MY DATA [OSAM]
+//G.DFSIVD1I DD DISP=SHR,DSN=&SYSUID..IMS.IVPDB1I     MY KEYS [VSAM]
 //*
 //G.DFSVSAMP DD DISP=SHR,DSN=DFSF10.PROCLIB(DFSVSM00)       BUFFERS!
 //G.IEFRDER  DD DSN=&SYSUID..IMS.IMSLOG,                  MY IMS LOG
 //             DISP=(,DELETE,DELETE),
 //             UNIT=SYSDA,SPACE=(TRK,(10,5),RLSE),
 //             DCB=(RECFM=VB,BLKSIZE=4096,LRECL=4092,BUFNO=5)
-//*
 //G.PRINTDD  DD SYSOUT=*                                   FOR DLT0!
-//G.SYSIN    DD DISP=SHR,DSN=&SYSUID..IMS.DLIIN(U3RCEX3)       INPUT
-//*
-//* //G.SYSIN    DD *
-//* S 1 1 1 1 1    COURSE
-//* L        GU    COURSE
-//* L   0010 GN
-//* /*
+//G.SYSIN    DD *
+S 1 1 1 1 1    IVPDB1
+L        GU    A1111111
+L   0005 GN
+/*

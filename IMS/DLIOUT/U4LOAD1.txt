@@ -1,0 +1,53 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 11.11.56.54 DATE= 25.276
+
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0004 OF 0004  PCB SELECTED =           DBD SELECTED = COURSE
+ COMMENTS                                                                                 C  TIME=11.11.56.55 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=COURSE
+
+ SEGMENT     =(CM17                   SEGM #1                          )
+
+ DBPCB   LEV=01  SEG=COURSE    RET CODE=    KFDB LEN=0004  KEY FDB=(CM17)
+ COMMENTS                                                                                 C  TIME=11.11.58.10 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=NAME
+
+ SEGMENT     =(ANNAJONES              SEGM #2                          )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0009  KEY FDB=(CM17JONES)
+ COMMENTS                                                                                 C  TIME=11.11.58.10 DATE=25.276
+ ........................................................................................................................
+ CALL=ISRT     SEG=EXPR
+
+ SEGMENT     =(SOME EXPERIENCE AL5    SEGM #3                          )
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17JONESAL5)
+ ........................................................................................................................
+ CALL=ISRT     SEG=EXPR
+
+ SEGMENT     =(SOME EXPERIENCE CB4    SEGM #4                          )
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17JONESCB4)
+ ........................................................................................................................
+ CALL=ISRT     SEG=EDUC
+
+ SEGMENT     =(SOME EDUCATION         SEGM #5                       MBA)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17JONESMBA)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         0         0         0         5         0         0         5
+ TOTAL NUMBER OF CALLS =         5  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSBLOAD   STOP TIME= 11.11.58.10 DATE= 25.276
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

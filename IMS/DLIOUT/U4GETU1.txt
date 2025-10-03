@@ -1,0 +1,56 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 11.30.33.79 DATE= 25.276
+
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0002 OF 0002  PCB SELECTED =           DBD SELECTED = COURSE
+ ........................................................................................................................
+ CALL=GU       SEG=COURSE
+
+ SEGMENT     =(CM17                   SEGM #1)
+
+ DBPCB   LEV=01  SEG=COURSE    RET CODE=    KFDB LEN=0004  KEY FDB=(CM17)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(ANNAJONES              SEGM #2)
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0009  KEY FDB=(CM17JONES)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(SOME EXPERIENCE AL5    SEGM #3)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17JONESAL5)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(SOME EXPERIENCE CB4    SEGM #4)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17JONESCB4)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(SOME EDUCATION         SEGM #5                       MBA    )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0012  KEY FDB=(CM17JONESMBA)
+ ........................................................................................................................
+ CALL=GN
+
+    NO SEGMENT RETURNED.
+
+ DBPCB   LEV=00  SEG=          RET CODE=GB  KFDB LEN=0000
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         1         5         0         0         0         0         0         0         0         6
+ TOTAL NUMBER OF CALLS =         6  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 11.30.34.30 DATE= 25.276
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+
