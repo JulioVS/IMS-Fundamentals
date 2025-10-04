@@ -23,5 +23,5 @@ U Call 7
 L        GU    COURSE  (CODE    = CM17)                                X
 L              NAME    (LASTNM  = SMIT )
 U Call 8
-L        GU    SKILL   (SKCLASS = PRG)                                 X
+L        UG    SKILL   (SKCLASS = PRG)                                 X
 L              NAME    (LASTNM  = JONES)

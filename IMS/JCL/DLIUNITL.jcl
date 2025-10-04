@@ -24,14 +24,11 @@
 //             DCB=(RECFM=VB,BLKSIZE=4096,LRECL=4092,BUFNO=5)
 //*
 //G.PRINTDD  DD SYSOUT=*                                   FOR DLT0!
-//G.SYSIN    DD DISP=SHR,DSN=&SYSUID..IMS.DLIIN(U4LOAD1)       INPUT
+//G.SYSIN    DD DISP=SHR,DSN=&SYSUID..IMS.DLIIN(U3LOAD1)       INPUT
 //*
 //* //G.SYSIN    DD *
 //* S 1 1 1 1 1    COURSE
 //* U
 //* L        ISRT  COURSE
 //* L        DATA  CM17
-//* U
-//* L        ISRT  NAME
-//* L        DATA  JAKEADAMS
 //* /*

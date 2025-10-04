@@ -1,10 +1,10 @@
  ************************************************************************************************************************
 
- IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 10.59.51.37 DATE= 25.276
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 13.37.18.84 DATE= 25.277
 
  STATUS INPUT: S 1 1 1 1 1    COURSE
  0002 OF 0002  PCB SELECTED =           DBD SELECTED = COURSE
- COMMENTS   Call 1                                                                        C  TIME=10.59.51.38 DATE=25.276
+ COMMENTS   Call 1                                                                        C  TIME=13.37.18.85 DATE=25.277
  ........................................................................................................................
  CALL=GU       SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
                SEG=NAME      FIELD=LASTNM    OPER==       VALUE=JONES)
@@ -12,7 +12,7 @@
  SEGMENT     =(CARLJONES              SEGM #4)
 
  DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0009  KEY FDB=(CM17JONES)
- COMMENTS   Call 2                                                                        C  TIME=10.59.51.88 DATE=25.276
+ COMMENTS   Call 2                                                                        C  TIME=13.37.19.35 DATE=25.277
  ........................................................................................................................
  CALL=GU       SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
                SEG=NAME      FIELD=LASTNM    OPER==       VALUE=SMITH)
@@ -21,7 +21,7 @@
  SEGMENT     =(SOME EDUCATION         SEGM #10                      BBA    )
 
  DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17SMITHBBA)
- COMMENTS   Call 3                                                                        C  TIME=10.59.51.88 DATE=25.276
+ COMMENTS   Call 3                                                                        C  TIME=13.37.19.35 DATE=25.277
  ........................................................................................................................
  CALL=GU       SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
                SEG=NAME
@@ -30,7 +30,7 @@
  SEGMENT     =(SOME EXPERIENCE PL3    SEGM #9)
 
  DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0012  KEY FDB=(CM17SMITHPL3)
- COMMENTS   Call 4                                                                        C  TIME=10.59.51.88 DATE=25.276
+ COMMENTS   Call 4                                                                        C  TIME=13.37.19.35 DATE=25.277
  ........................................................................................................................
  CALL=GU       SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
                SEG=NAME      FIELD=LASTNM    OPER==       VALUE=CAINE)
@@ -38,7 +38,7 @@
     NO SEGMENT RETURNED.
 
  DBPCB   LEV=01  SEG=COURSE    RET CODE=GE  KFDB LEN=0004  KEY FDB=(CM17)
- COMMENTS   Call 5                                                                        C  TIME=10.59.51.88 DATE=25.276
+ COMMENTS   Call 5                                                                        C  TIME=13.37.19.35 DATE=25.277
  ........................................................................................................................
  CALL=GU       SEG=NAME      FIELD=LASTNM    OPER==       VALUE=SMITH)
                SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
@@ -46,7 +46,7 @@
     NO SEGMENT RETURNED.
 
  DBPCB   LEV=02  SEG=NAME      RET CODE=AC  KFDB LEN=0009  KEY FDB=(CM17SMITH)
- COMMENTS   Call 6                                                                        C  TIME=10.59.51.88 DATE=25.276
+ COMMENTS   Call 6                                                                        C  TIME=13.37.19.35 DATE=25.277
  ........................................................................................................................
  CALL=GU       SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
                SEG=NAME      FIELD=LASTNM    OPER==       VALUE=SMIT)
@@ -54,7 +54,7 @@
     NO SEGMENT RETURNED.
 1
  DBPCB   LEV=02  SEG=NAME      RET CODE=AJ  KFDB LEN=0009  KEY FDB=(CM17SMITH)
- COMMENTS   Call 7                                                                        C  TIME=10.59.51.88 DATE=25.276
+ COMMENTS   Call 7                                                                        C  TIME=13.37.19.35 DATE=25.277
  ........................................................................................................................
  CALL=GU       SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
                SEG=NAME      FIELD=LASTNM    OPER==       VALUE=SMIT )
@@ -62,22 +62,22 @@
     NO SEGMENT RETURNED.
 
  DBPCB   LEV=01  SEG=COURSE    RET CODE=GE  KFDB LEN=0004  KEY FDB=(CM17)
- COMMENTS   Call 8                                                                        C  TIME=10.59.51.88 DATE=25.276
+ COMMENTS   Call 8                                                                        C  TIME=13.37.19.35 DATE=25.277
  ........................................................................................................................
- CALL=GU       SEG=SKILL     FIELD=SKCLASS   OPER==       VALUE=PRG)
+ CALL=UG       SEG=SKILL     FIELD=SKCLASS   OPER==       VALUE=PRG)
                SEG=NAME      FIELD=LASTNM    OPER==       VALUE=JONES)
 
     NO SEGMENT RETURNED.
 
- DBPCB   LEV=00  SEG=          RET CODE=AC  KFDB LEN=0000
+ DBPCB   LEV=01  SEG=COURSE    RET CODE=AD  KFDB LEN=0004  KEY FDB=(CM17)
 
 
  STATISTIC FOR DATA BASE CALL:
                              GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
- DL/I COUNTS BY CALL-         8         0         0         0         0         0         0         0         0         8
+ DL/I COUNTS BY CALL-         7         0         0         0         0         0         0         0         0         7
  TOTAL NUMBER OF CALLS =         8  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
 
- PSB= PSB3CBL   STOP TIME= 10.59.51.88 DATE= 25.276
+ PSB= PSB3CBL   STOP TIME= 13.37.19.35 DATE= 25.277
 
 
  *****************************************END OF TEST   END OF TEST   END OF TEST****************************************

@@ -24,7 +24,7 @@
 //             DCB=(RECFM=VB,BLKSIZE=4096,LRECL=4092,BUFNO=5)
 //*
 //G.PRINTDD  DD SYSOUT=*                                   FOR DLT0!
-//G.SYSIN    DD DISP=SHR,DSN=&SYSUID..IMS.DLIIN(U4GETU1)       INPUT
+//G.SYSIN    DD DISP=SHR,DSN=&SYSUID..IMS.DLIIN(U3RCEX1)       INPUT
 //*
 //* //G.SYSIN    DD *
 //* S 1 1 1 1 1    COURSE
