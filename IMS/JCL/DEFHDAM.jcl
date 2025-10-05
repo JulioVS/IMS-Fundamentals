@@ -1,10 +1,14 @@
 //DEFHDAM   JOB FB3,NOTIFY=&SYSUID
 //*
 //*   UTILITY JCL FOR IDCAMS  -- ALLOCATE FILE FOR 'HDAM' DB
-//*                              DATA => VSAM [ESDS]
+//*                              DATA => VSAM <ESDS>
 //*
 // EXPORT SYMLIST=(*)
+//*SET MYDB='SKILL'
+//*SET MYDB='DUMMY'
 // SET MYDB='COURSE'
+//*
+//*   'HDAM' RECORD SIZE MUST BE EXACTLY 7 BYTES LESS THAN C.I. SIZE!
 //*
 //STEP1    EXEC PGM=IDCAMS
 //SYSPRINT   DD SYSOUT=*

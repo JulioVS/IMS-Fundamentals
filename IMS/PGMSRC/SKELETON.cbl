@@ -82,7 +82,8 @@
            ENTRY 'DLITCBL' USING SKILL-PCB.
 
       *    JE: THIS JUST TO MAKE VSCODE HAPPY SO IT LINTS :)
-           PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END.
+           IF DBDNAME = "DUMMY" THEN
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END.
       *
       ****************************************************************
       * READ SYSIN INPUT
