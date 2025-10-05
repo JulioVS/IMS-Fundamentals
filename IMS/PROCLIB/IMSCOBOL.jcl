@@ -65,10 +65,8 @@
 //L      EXEC PGM=IEWL,REGION=4M,                                       00560000
 //            PARM='XREF,LET,LIST',                                     00570000
 //            COND=(8,LT,C)                                             00580000
-//RESLIB   DD DSN=&NODE2..&SYS2.SDFSRESL,DISP=SHR                       00585000
-//SYSLIB   DD DSN=&LIBPRFX..SCEELKED,                                   00590000
-//            DISP=SHR                                                  00600000
-//SDFSRESL DD DSN=&NODE2..&SYS2.SDFSRESL,DISP=SHR                       00610000
+//SYSLIB   DD DSN=&NODE2..&SYS2.SDFSRESL,DISP=SHR                       00600000
+//         DD DSN=&LIBPRFX..SCEELKED,DISP=SHR                           00610000
 //SYSLIN   DD DSN=&&LIN,DISP=(OLD,DELETE)                               00620000
 //         DD DDNAME=SYSIN                                              00660000
 //SYSLMOD  DD DISP=SHR,                                                 00670000

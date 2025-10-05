@@ -5,7 +5,7 @@
 //SETLIB   JCLLIB ORDER=DFSF10.PROCLIB
 //*
 //IMSDLI   EXEC DLIBATCH,
-//             MBR='SKELETON',                     DL/I TEST PROGRAM
+//             MBR='IMSLAB1',                          LAB 1 PROGRAM
 //             PSB='PSB1CBL',                             MY OWN PSB
 //             DBRC='N',                                   NO RECON!
 //             IRLM='N'                                    NO LOCKS!
@@ -29,5 +29,13 @@
 //G.SYSOUT   DD SYSOUT=*
 //G.SYSPRINT DD SYSOUT=*
 //G.SYSIN    DD *
+****************************************************************
+* LAB 1 INPUT
+****************************************************************
+1
+GBU115   AKERSON, LAWRENCE R.                      1000
+GED003   FERRIS, MONA J.                           1000
+GKB750   AINLAY, HOWARD                            2220
+GBC290   JAMORA, JOSEPH W.                         1000
 E
 /*

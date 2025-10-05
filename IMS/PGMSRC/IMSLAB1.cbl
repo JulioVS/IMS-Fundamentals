@@ -13,7 +13,7 @@
       * - ADD NECESSARY COUNTERS
       ****************************************************************
       *
-      *
+       77 LAB1-COUNTER            PIC 9(02).
       *
       ****************************************************************
       * SYSIN INPUT DATA
@@ -21,11 +21,11 @@
       ****************************************************************
       *
        01 SYSIN-INPUT.
-          05 COL1                PIC X(01).
-          05 KSKILL              PIC X(08).
-          05 KNAME               PIC X(42).
-          05 KEXPR               PIC X(04).
-          05 FILLER              PIC X(25).
+          05 COL1                 PIC X(01).
+          05 KSKILL               PIC X(08).
+          05 KNAME                PIC X(42).
+          05 KEXPR                PIC X(04).
+          05 FILLER               PIC X(25).
       *
       ****************************************************************
       * DL/I CALL FUNCTIONS
@@ -33,6 +33,12 @@
       * - COMPLETE WHERE NECESSARY
       ****************************************************************
       *
+       77 GU                      PIC X(04)  VALUE 'GU  '.
+       77 GN                      PIC X(04)  VALUE 'GN  '.
+       77 GNP                     PIC X(04)  VALUE 'GNP '.
+       77 GHU                     PIC X(04)  VALUE 'GHU '.
+       77 GHN                     PIC X(04)  VALUE 'GHN '.
+       77 GHNP                    PIC X(04)  VALUE 'GHNP'.
       *
       *
       ****************************************************************
@@ -41,6 +47,21 @@
       * - COMPLETE WHERE NECESSARY
       ****************************************************************
       *
+       01 IOAREA-SKILL.
+          05 SKCLASS              PIC X(08).
+          05 SKILL-DATA           PIC X(82).
+      *
+       01 IOAREA-NAME.
+          05 FULNAM               PIC X(42).
+          05 NAME-DATA            PIC X(78).
+      *
+       01 IOAREA-EXPR.
+          05 EXPR-DATA            PIC X(16).
+          05 CLASSIF              PIC X(04).
+      *
+       01 IOAREA-EDUC.
+          05 EDUID                PIC X(18).
+          05 EDUC-DATA            PIC X(57).
       *
       ****************************************************************
       * SSA'S : FULLY QUALIFIED, INCLUDING NULL COMMAND CODES.
@@ -48,6 +69,45 @@
       * - COMPLETE WHERE NECESSARY
       ****************************************************************
       *
+       01 SSA-QUAL-SKILL.
+          05 SEGMENT-NAME         PIC X(08)  VALUE 'SKILL   '.
+          05 COMMAND-CODES-START  PIC X(01)  VALUE '*'.
+          05 COMMAND-CODES        PIC X(04)  VALUE '----'.
+          05 QUAL-START           PIC X(01)  VALUE '('.
+          05 QUAL-FIELD-NAME      PIC X(08)  VALUE 'SKCLASS '.
+          05 QUAL-OPERATOR        PIC X(02)  VALUE '= '.
+          05 QUAL-VALUE           PIC X(1).
+          05 QUAL-END             PIC X(01)  VALUE ')'.
+      *
+       01 SSA-QUAL-NAME.
+          05 SEGMENT-NAME         PIC X(08)  VALUE 'NAME    '.
+          05 COMMAND-CODES-START  PIC X(01)  VALUE '*'.
+          05 COMMAND-CODES        PIC X(04)  VALUE '----'.
+          05 QUAL-START           PIC X(01)  VALUE '('.
+          05 QUAL-FIELD-NAME      PIC X(08)  VALUE 'FULNAM  '.
+          05 QUAL-OPERATOR        PIC X(02)  VALUE '= '.
+          05 QUAL-VALUE           PIC X(1).
+          05 QUAL-END             PIC X(01)  VALUE ')'.
+      *
+       01 SSA-QUAL-EXPR.
+          05 SEGMENT-NAME         PIC X(08)  VALUE 'EXPR    '.
+          05 COMMAND-CODES-START  PIC X(01)  VALUE '*'.
+          05 COMMAND-CODES        PIC X(04)  VALUE '----'.
+          05 QUAL-START           PIC X(01)  VALUE '('.
+          05 QUAL-FIELD-NAME      PIC X(08)  VALUE 'CLASSIF '.
+          05 QUAL-OPERATOR        PIC X(02)  VALUE '= '.
+          05 QUAL-VALUE           PIC X(04).
+          05 QUAL-END             PIC X(01)  VALUE ')'.
+      *
+       01 SSA-QUAL-EDUC.
+          05 SEGMENT-NAME         PIC X(08)  VALUE 'EDUC    '.
+          05 COMMAND-CODES-START  PIC X(01)  VALUE '*'.
+          05 COMMAND-CODES        PIC X(04)  VALUE '----'.
+          05 QUAL-START           PIC X(01)  VALUE '('.
+          05 QUAL-FIELD-NAME      PIC X(08)  VALUE 'EDUID   '.
+          05 QUAL-OPERATOR        PIC X(02)  VALUE '= '.
+          05 QUAL-VALUE           PIC X(18).
+          05 QUAL-END             PIC X(01)  VALUE ')'.
       *
        LINKAGE SECTION.
       *
@@ -61,15 +121,15 @@
       ****************************************************************
       *
        01 SKILL-PCB.
-          05 DBDNAME             PIC X(08).
-          05 SEGMENT-LEVEL       PIC X(02).
-          05 STATUS-CODE         PIC X(02).
-          05 PROCOPT             PIC X(04).
-          05 RESERVED            PIC S9(05) COMPUTATIONAL.
-          05 SEGMENT-NAME        PIC X(08).
-          05 KFBAREA-KEY-LENGTH  PIC S9(05) COMPUTATIONAL.
-          05 NUMBER-OF-SENSEGS   PIC S9(05) COMPUTATIONAL.
-          05 KFBAREA             PIC X(01).
+          05 DBDNAME              PIC X(08).
+          05 SEGMENT-LEVEL        PIC X(02).
+          05 STATUS-CODE          PIC X(02).
+          05 PROCOPT              PIC X(04).
+          05 RESERVED             PIC S9(05) COMPUTATIONAL.
+          05 SEGMENT-NAME         PIC X(08).
+          05 KFBAREA-KEY-LENGTH   PIC S9(05) COMPUTATIONAL.
+          05 NUMBER-OF-SENSEGS    PIC S9(05) COMPUTATIONAL.
+          05 KFBAREA              PIC X(68).
       *
        PROCEDURE DIVISION.
       *
@@ -80,10 +140,6 @@
       ****************************************************************
       *
            ENTRY 'DLITCBL' USING SKILL-PCB.
-
-      *    JE: THIS JUST TO MAKE VSCODE HAPPY SO IT LINTS :)
-           IF DBDNAME = "DUMMY" THEN
-              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END.
       *
       ****************************************************************
       * READ SYSIN INPUT
@@ -164,7 +220,10 @@
       *---------------------------------------------------------------
       *
        LAB1-START.
-           CONTINUE.
+           CALL 'CBLTDLI' USING GU, SKILL-PCB, IOAREA-SKILL
+           ON EXCEPTION
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+           END-CALL.
       *
       ****************************************************************
       * LAB 1 LOGIC GOES HERE.
