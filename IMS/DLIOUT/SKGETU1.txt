@@ -1,0 +1,287 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 09.40.27.29 DATE= 25.279
+
+ STATUS INPUT: S 1 1 1 1 1    SKILL
+ 0002 OF 0003  PCB SELECTED =           DBD SELECTED = SKILL
+ ........................................................................................................................
+ CALL=GU
+
+ SEGMENT     =(BU115   HUMAN FACTORS-DESIGN                                                              )
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=    KFDB LEN=0008  KEY FDB=(BU115   )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(AKERSON, LAWRENCE R.                                                                                )
+              (                    )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0050  KEY FDB=(BU115   AKERSON, LAWRENCE R.                      )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(05A100-30436    1000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      1000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(06A200-10242    2000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      2000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(09A200-41051    3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      3000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(10A300-2        4000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      4000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(HARVARD           MBUSINESS ADM.                                           )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0068
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      HARVARD           )
+1........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(BC290   MAGNETIC DEVICES                                                                  )
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=GA  KFDB LEN=0008  KEY FDB=(BC290   )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(JAMORA, JOSEPH W.                                                                                   )
+              (                    )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0050  KEY FDB=(BC290   JAMORA, JOSEPH W.                         )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(05P600-61164    1000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BC290   JAMORA, JOSEPH W.                         1000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(04P600-8        2000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BC290   JAMORA, JOSEPH W.                         2000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(HARVARD           MPHYSICS                                                 )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0068
+   KEY FDBK=  (BC290   JAMORA, JOSEPH W.                         HARVARD           )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(ED003   MARKETING                                                                         )
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=GA  KFDB LEN=0008  KEY FDB=(ED003   )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(FERRIS, MONA J.                                                                                     )
+              (                    )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0050  KEY FDB=(ED003   FERRIS, MONA J.                           )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01F700-30761    1000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (ED003   FERRIS, MONA J.                           1000)
+1........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01F700-30762    1000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (ED003   FERRIS, MONA J.                           1000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01F700-50567    2000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (ED003   FERRIS, MONA J.                           2000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(02F700-601      3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (ED003   FERRIS, MONA J.                           3000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(02F700-602      3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (ED003   FERRIS, MONA J.                           3000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(BROWN             MECONOMICS                                               )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0068
+   KEY FDBK=  (ED003   FERRIS, MONA J.                           BROWN             )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(BROWN             MPHILOSOPHY                                              )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (ED003   FERRIS, MONA J.                           BROWN             )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(EK999   MANAGEMENT-SYSTEMS OR METHODS                                                     )
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=GA  KFDB LEN=0008  KEY FDB=(EK999   )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(LINDHOLM, THOMAS C.                                                                                 )
+              (                    )
+
+1DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0050  KEY FDB=(EK999   LINDHOLM, THOMAS C.                       )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(07G100-40261    1000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (EK999   LINDHOLM, THOMAS C.                       1000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(05G100-61266    2000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (EK999   LINDHOLM, THOMAS C.                       2000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(05G100-704      3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (EK999   LINDHOLM, THOMAS C.                       3000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(MICHIGAN          BECONOMICS                                               )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0068
+   KEY FDBK=  (EK999   LINDHOLM, THOMAS C.                       MICHIGAN          )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(KB750   PURCHASING APPLICATIONS                                                           )
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=GA  KFDB LEN=0008  KEY FDB=(KB750   )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(FREIDMAN, JACK A.                                                                                   )
+              (                    )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0050  KEY FDB=(KB750   FREIDMAN, JACK A.                         )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(02A900-10966    1000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         1000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01A900-20767    2000)
+
+1DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         2000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01A900-40461    3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         3000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01A900-40462    3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         3000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01A900-40463    3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         3000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(01A900-6        4000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         4000)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(BROWN             BBUSINESS ADM. MGMGT                                     )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0068
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         BROWN             )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(BROWN             HUMAN RESOURCES                                          )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         BROWN             )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(BROWN             MARKETING                                                )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         BROWN             )
+ ........................................................................................................................
+ CALL=GN
+
+1   NO SEGMENT RETURNED.
+
+ DBPCB   LEV=00  SEG=          RET CODE=GB  KFDB LEN=0000
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         1        38         0         0         0         0         0         0         0        39
+ TOTAL NUMBER OF CALLS =        39  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB1CBL   STOP TIME= 09.40.27.78 DATE= 25.279
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

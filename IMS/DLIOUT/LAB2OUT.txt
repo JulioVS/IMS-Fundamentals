@@ -1,0 +1,83 @@
+ *
+ ******************************************
+ * LAB 2 OUTPUT STARTS HERE *
+ ******************************************
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ UBU115   AKERSON, LAWRENCE R.                      1000
+ *
+ => RECORD SUCCESSFULLY INSERTED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY RETRIEVED AND HELD
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY REPLACED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+    DATA  = MUNIVERSE (REPLACED DATA)
+ => RECORD SUCCESSFULLY DELETED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ UED003   HEBERT, CAMILLE                           1000
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 01
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = SKILL
+ KFBAREA-KEY-LENGTH = 00008
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = ED003   AKERSON, LAWRENCE R.                      Z45864
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ UEK999   LINDHOLM, THOMAS C.                       2000
+ *
+ => RECORD SUCCESSFULLY INSERTED
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY RETRIEVED AND HELD
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY REPLACED
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+    DATA  = MUNIVERSE (REPLACED DATA)
+ => RECORD SUCCESSFULLY DELETED
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ E
+ *
+ *
+ ******************************************
+ * END OF OUTPUT *
+ ******************************************
+ *

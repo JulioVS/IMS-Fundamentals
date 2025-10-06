@@ -39,6 +39,9 @@
        77 GHU                     PIC X(04)  VALUE 'GHU '.
        77 GHN                     PIC X(04)  VALUE 'GHN '.
        77 GHNP                    PIC X(04)  VALUE 'GHNP'.
+       77 ISRT                    PIC X(04)  VALUE 'ISRT'.
+       77 REPL                    PIC X(04)  VALUE 'REPL'.
+       77 DLET                    PIC X(04)  VALUE 'DLET'.
       *
       *
       ****************************************************************
@@ -76,7 +79,7 @@
           05 QUAL-START           PIC X(01)  VALUE '('.
           05 QUAL-FIELD-NAME      PIC X(08)  VALUE 'SKCLASS '.
           05 QUAL-OPERATOR        PIC X(02)  VALUE '= '.
-          05 QUAL-VALUE           PIC X(8).
+          05 QUAL-VALUE           PIC X(08).
           05 QUAL-END             PIC X(01)  VALUE ')'.
       *
        01 SSA-QUAL-NAME.
@@ -231,10 +234,7 @@
                                 SKILL-PCB,
                                 IOAREA-NAME,
                                 SSA-QUAL-SKILL,
-                                SSA-QUAL-NAME
-           ON EXCEPTION
-              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
-           END-CALL.
+                                SSA-QUAL-NAME.
 
            IF STATUS-CODE OF SKILL-PCB NOT = '  '
               PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
@@ -252,10 +252,6 @@
                    CALL 'CBLTDLI' USING GNP,
                                         SKILL-PCB,
                                         IOAREA-EDUC
-                   ON EXCEPTION
-                      PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
-                      EXIT PARAGRAPH
-                   END-CALL
 
                    IF STATUS-CODE OF SKILL-PCB = '  ' OR = 'GK'
                       ADD 1 TO LAB1-COUNTER
@@ -279,7 +275,118 @@
       *---------------------------------------------------------------
       *
        LAB2-START.
-           CONTINUE.
+
+      *    ----- 1. INSERT -----
+
+      *    THE KEY VALUES FOR THE SKILL AND NAME SEGMENTS UNDER WHICH
+      *    I WILL ADD A NEW 'EDUC' SEGMENT.
+           MOVE KSKILL OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-SKILL.
+           MOVE KNAME OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-NAME.
+
+      *    THE DATA TO BE PLACED IN THE NEW 'EDUC' SEGMENT.
+           MOVE 'Z45864' TO EDUID OF IOAREA-EDUC.
+           MOVE 'MSYSTEMS (INITIAL DATA)' TO EDUC-DATA OF IOAREA-EDUC.
+
+      *    WE NEED AN UNQUALIFIED SSA FOR INSERT CALLS!
+      *    THUS, THE 'MOVE A SPACE TO POSITION 9 OF THE SSA' TRICK
+      *    IS USED :)
+           MOVE ' ' TO COMMAND-CODES-START OF SSA-QUAL-EDUC.
+
+      *    THE CALL TO INSERT THE NEW 'EDUC' SEGMENT.
+           CALL 'CBLTDLI' USING ISRT,
+                                SKILL-PCB,
+                                IOAREA-EDUC,
+                                SSA-QUAL-SKILL,
+                                SSA-QUAL-NAME,
+                                SSA-QUAL-EDUC.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> RECORD SUCCESSFULLY INSERTED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   EDUID = ' EDUID IN KFBAREA-DETAIL.
+           DISPLAY '   DATA  = ' EDUC-DATA OF IOAREA-EDUC.
+
+
+      *    ----- 2. GET & HOLD -----
+
+      *    WITH ALL PREVIOUS IOAREA AND SSA DATA STILL IN PLACE, WE
+      *    WILL NOW UPDATE OUR 'EDUC' SEGMENT.
+
+      *    FIRST WE NEED TO 'GET' OUR NEWLY ADDED 'EDUC' SEGMENT WITH
+      *    THE 'HOLD' OPTION BY BUILDING A NOW-QUALIFIED SSA AND
+      *    ISSUING A 'GHU' DL/I CALL.
+
+           MOVE '*' TO COMMAND-CODES-START OF SSA-QUAL-EDUC.
+           MOVE 'Z45864' TO QUAL-VALUE OF SSA-QUAL-EDUC.
+
+           CALL 'CBLTDLI' USING GHU,
+                                SKILL-PCB,
+                                IOAREA-EDUC,
+                                SSA-QUAL-SKILL,
+                                SSA-QUAL-NAME,
+                                SSA-QUAL-EDUC.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> RECORD SUCCESSFULLY RETRIEVED AND HELD'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   EDUID = ' EDUID IN KFBAREA-DETAIL.
+           DISPLAY '   DATA  = ' EDUC-DATA OF IOAREA-EDUC.
+
+
+      *    ----- 3. REPLACE  -----
+
+      *    STILL WITH ALL PREVIOUS DATA IN PLACE, UPDATE IOAREA AND
+      *    ISSUE A 'REPL' DL/I CALL TO UPDATE THE 'EDUC' SEGMENT.
+
+           MOVE 'MUNIVERSE (REPLACED DATA)' TO EDUC-DATA OF IOAREA-EDUC.
+
+           CALL 'CBLTDLI' USING REPL,
+                                SKILL-PCB,
+                                IOAREA-EDUC.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> RECORD SUCCESSFULLY REPLACED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   EDUID = ' EDUID IN KFBAREA-DETAIL.
+           DISPLAY '   DATA  = ' EDUC-DATA OF IOAREA-EDUC.
+
+
+      *    ----- 4. DELETE  -----
+
+      *    FINALLY, WE WILL DELETE THE 'EDUC' SEGMENT WE JUST INSERTED,
+      *    RETRIEVED AND REPLACED BY ISSUING A 'DLET' DL/I CALL.
+
+      *    NOTE THAT THE PREVIOUS 'HOLD' IS STILL IN EFFECT!
+      *    SO NO ADDITIONAL 'GHU' CALL IS NEEDED!
+
+           CALL 'CBLTDLI' USING DLET,
+                                SKILL-PCB,
+                                IOAREA-EDUC.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> RECORD SUCCESSFULLY DELETED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   EDUID = ' EDUID IN KFBAREA-DETAIL.
       *
       ****************************************************************
       * LAB 2 LOGIC GOES HERE.
