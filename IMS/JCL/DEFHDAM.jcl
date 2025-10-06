@@ -4,9 +4,7 @@
 //*                              DATA => VSAM <ESDS>
 //*
 // EXPORT SYMLIST=(*)
-//*SET MYDB='SKILL'
-//*SET MYDB='DUMMY'
-// SET MYDB='COURSE'
+// SET MYDB='SKILL'
 //*
 //*   'HDAM' RECORD SIZE MUST BE EXACTLY 7 BYTES LESS THAN C.I. SIZE!
 //*

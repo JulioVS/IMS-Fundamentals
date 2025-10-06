@@ -1,0 +1,62 @@
+ *
+ ******************************************
+ * LAB 1 OUTPUT STARTS HERE *
+ ******************************************
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GBU115   AKERSON, LAWRENCE R.                      1000
+ *
+ => RECORD SUCCESSFULLY RETRIEVED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    NUMBER OF DEPENDENT SEGMENTS = 05
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GED003   FERRIS, MONA J.                           1000
+ *
+ => RECORD SUCCESSFULLY RETRIEVED
+    SKILL = ED003
+    NAME  = FERRIS, MONA J.
+    NUMBER OF DEPENDENT SEGMENTS = 07
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GKB750   AINLAY, HOWARD                            2220
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 01
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = SKILL
+ KFBAREA-KEY-LENGTH = 00008
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = KB750   FERRIS, MONA J.
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GBC290   JAMORA, JOSEPH W.                         1000
+ *
+ => RECORD SUCCESSFULLY RETRIEVED
+    SKILL = BC290
+    NAME  = JAMORA, JOSEPH W.
+    NUMBER OF DEPENDENT SEGMENTS = 03
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ E
+ *
+ *
+ ******************************************
+ * END OF OUTPUT *
+ ******************************************
+ *

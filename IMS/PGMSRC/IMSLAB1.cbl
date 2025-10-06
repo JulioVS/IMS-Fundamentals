@@ -76,7 +76,7 @@
           05 QUAL-START           PIC X(01)  VALUE '('.
           05 QUAL-FIELD-NAME      PIC X(08)  VALUE 'SKCLASS '.
           05 QUAL-OPERATOR        PIC X(02)  VALUE '= '.
-          05 QUAL-VALUE           PIC X(1).
+          05 QUAL-VALUE           PIC X(8).
           05 QUAL-END             PIC X(01)  VALUE ')'.
       *
        01 SSA-QUAL-NAME.
@@ -86,7 +86,7 @@
           05 QUAL-START           PIC X(01)  VALUE '('.
           05 QUAL-FIELD-NAME      PIC X(08)  VALUE 'FULNAM  '.
           05 QUAL-OPERATOR        PIC X(02)  VALUE '= '.
-          05 QUAL-VALUE           PIC X(1).
+          05 QUAL-VALUE           PIC X(42).
           05 QUAL-END             PIC X(01)  VALUE ')'.
       *
        01 SSA-QUAL-EXPR.
@@ -130,6 +130,10 @@
           05 KFBAREA-KEY-LENGTH   PIC S9(05) COMPUTATIONAL.
           05 NUMBER-OF-SENSEGS    PIC S9(05) COMPUTATIONAL.
           05 KFBAREA              PIC X(68).
+          05 KFBAREA-DETAIL REDEFINES KFBAREA.
+             10 SKCLASS           PIC X(08).
+             10 FULNAM            PIC X(42).
+             10 EDUID             PIC X(18).
       *
        PROCEDURE DIVISION.
       *
@@ -220,10 +224,45 @@
       *---------------------------------------------------------------
       *
        LAB1-START.
-           CALL 'CBLTDLI' USING GU, SKILL-PCB, IOAREA-SKILL
+           MOVE KSKILL OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-SKILL.
+           MOVE KNAME OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-NAME.
+
+           CALL 'CBLTDLI' USING GU,
+                                SKILL-PCB,
+                                IOAREA-NAME,
+                                SSA-QUAL-SKILL,
+                                SSA-QUAL-NAME
            ON EXCEPTION
               PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
            END-CALL.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> RECORD SUCCESSFULLY RETRIEVED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+
+           INITIALIZE LAB1-COUNTER.
+
+           PERFORM UNTIL
+              STATUS-CODE IN SKILL-PCB = 'GA' OR = 'GB' OR = 'GE'
+                   CALL 'CBLTDLI' USING GNP,
+                                        SKILL-PCB,
+                                        IOAREA-EDUC
+                   ON EXCEPTION
+                      PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+                      EXIT PARAGRAPH
+                   END-CALL
+
+                   IF STATUS-CODE OF SKILL-PCB = '  ' OR = 'GK'
+                      ADD 1 TO LAB1-COUNTER
+                   END-IF
+           END-PERFORM.
+
+           DISPLAY '   NUMBER OF DEPENDENT SEGMENTS = ' LAB1-COUNTER.
       *
       ****************************************************************
       * LAB 1 LOGIC GOES HERE.
