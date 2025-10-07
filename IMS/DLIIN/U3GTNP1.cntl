@@ -13,6 +13,6 @@ U Call 1F
 L        GNP   NAME
 U Call 2A
 L        GU    COURSE  (CODE    = CM17)                                X
-L              NAME    (LASTNM  = BROWN)
+               NAME    (LASTNM  = BROWN)
 U Call 2B
 L        GNP   NAME

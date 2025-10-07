@@ -1,7 +1,7 @@
 S 1 1 1 1 1    COURSE
 U Call 12A
 L        GU    COURSE  (CODE    = CM17)                                X
-L              NAME    (LASTNM  = JONES)
+               NAME    (LASTNM  = JONES)
 U Call 12B
 L        GNP   EXPR    (CLASSIF = CB4)
 U Call 12C
@@ -12,7 +12,7 @@ U Call 12E
 L        GN
 U Call 13A
 L        GU    COURSE  (CODE    = CM17)                                X
-L              NAME    (LASTNM  = DAVIS)
+               NAME    (LASTNM  = DAVIS)
 U Call 13B
 L        GNP   EXPR
 U Call 14

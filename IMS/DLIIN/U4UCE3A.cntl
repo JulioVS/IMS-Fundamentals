@@ -11,7 +11,7 @@ L        DATA  CM17                   SEGM #1
 U              --------------------------
 U Call 4A
 L        ISRT  COURSE  (CODE    = CM17)                                X
-L              NAME
+               NAME
 L        DATA  ANNAJONES              SEGM #2
 U Call 4B
 L        ISRT  EXPR

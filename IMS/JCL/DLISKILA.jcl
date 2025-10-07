@@ -6,7 +6,7 @@
 //*
 //IMSDLI   EXEC DLIBATCH,
 //             MBR='DFSDDLT0',                     DL/I TEST PROGRAM
-//             PSB='PSB1CBL',                             MY OWN PSB
+//             PSB='PSB1CBL',                           MY SKILL PSB
 //             DBRC='N',                                   NO RECON!
 //             IRLM='N'                                    NO LOCKS!
 //*

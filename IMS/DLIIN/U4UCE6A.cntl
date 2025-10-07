@@ -8,6 +8,6 @@ U                   (Fully loaded DB)
 U
 U Call 10A
 L        GHU   COURSE  (CODE    = CM17)                                X
-L              NAME    (LASTNM  = JONES)
+               NAME    (LASTNM  = JONES)
 U Call 10B
 L        DLET

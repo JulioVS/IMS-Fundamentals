@@ -11,5 +11,5 @@ L        DATA  CM17                   SEGM #1
 U              --------------------------
 U Call 5
 L        ISRT  COURSE  (CODE    = CM17)                                X
-L              EXPR
+               EXPR
 L        DATA  SOME EXPERIENCE AL5    SEGM #3

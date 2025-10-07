@@ -8,7 +8,7 @@ U                   (Fully loaded DB)
 U
 U Call 11A
 L        GHU   COURSE  (CODE    = CM17)                                X
-L              NAME    (LASTNM  = JONES)
+               NAME    (LASTNM  = JONES)
 U
 U     ----------------------------------------------------------
 U      I can't manipulate the IOAREA from here, so this exercise

@@ -1,4 +1,4 @@
-*---------------------------------------------------------------
-* NO INPUT!
-* "LAB 3" INVOLVES THE DL/I TEST (DLT0) PROGRAM!
-*---------------------------------------------------------------
+S 1 1 1 1 1    SKILL
+L        GU    SKILL   (SKCLASS = BU115   )                            X
+               NAME    (FULNAM  = AKERSON, LAWRENCE R.                 X
+         CONT       )

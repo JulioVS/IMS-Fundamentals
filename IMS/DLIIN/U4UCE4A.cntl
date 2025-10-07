@@ -8,7 +8,7 @@ U              (Should have root segm only!)
 U
 U Call 6A
 L        ISRT  COURSE  (CODE    = CM17)                                X
-L              NAME
+               NAME
 L        DATA  ANNAJONES              SEGM #2
 U Call 6B
 L        ISRT  EDUC

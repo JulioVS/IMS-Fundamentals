@@ -13,5 +13,5 @@ U Call 3B
 L        GN    NAME    (LASTNM  = JONES)
 U Call 4
 L        GN    COURSE  (CODE    = CM17)                                X
-L              NAME    (LASTNM  = ADAMS)                               X
-L        GN    EXPR    (CLASSIF = PL5)
+               NAME    (LASTNM  = ADAMS)                               X
+               EXPR    (CLASSIF = PL5)

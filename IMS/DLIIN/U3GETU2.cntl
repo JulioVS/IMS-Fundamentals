@@ -7,4 +7,4 @@ U Call 4C
 L        GU    EXPR    (CLASSIF = CB3)
 U Call 4D
 L        GU    COURSE  (CODE    = CM17)                                X
-L              EDUC    (DEGREE  = MBA)
+               EDUC    (DEGREE  = MBA)
