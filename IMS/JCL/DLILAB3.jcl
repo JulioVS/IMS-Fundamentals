@@ -24,8 +24,21 @@
 //             DCB=(RECFM=VB,BLKSIZE=4096,LRECL=4092,BUFNO=5)
 //G.PRINTDD  DD SYSOUT=*                                   FOR DLT0!
 //G.SYSIN    DD *
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
 S 1 1 1 1 1    SKILL
 L        GU    SKILL   (SKCLASS = BU115   )                            X
                NAME    (FULNAM  = AKERSON, LAWRENCE R.                 X
-         CONT       )
+         CONT       )                                                  X
+         GNP   EDUC    *L(EDUID   = HARVARD           )
+U
+EH8    OK
+U
+L        GU    SKILL   *D(SKCLASS = BU115   )                          X
+               NAME    *DP(FULNAM  = AKERSON, LAWRENCE R.              X
+         CONT          )                                               X
+L        GNP   EXPR    *F
+U
+L   0030 GNP   EXPR
 /*

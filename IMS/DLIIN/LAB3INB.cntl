@@ -1,0 +1,21 @@
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+S 1 1 1 1 1    SKILL
+L        ISRT  SKILL   (SKCLASS = BU115   )                            X
+               NAME    (FULNAM  = AKERSON, LAWRENCE R.                 X
+         CONT       )                                                  X
+               EDUC
+L        DATA  Z45864            MSYSTEMS (INITIAL DATA)
+U
+EH8
+U
+L        GHU   SKILL   (SKCLASS = BU115   )                            X
+               NAME    (FULNAM  = AKERSON, LAWRENCE R.                 X
+         CONT       )                                                  X
+               EDUC    (EDUID   = Z45864            )
+U
+L        REPL
+L        DATA  Z45864            MUNIVERSE (REPLACED DATA)
+U
+L        DLET

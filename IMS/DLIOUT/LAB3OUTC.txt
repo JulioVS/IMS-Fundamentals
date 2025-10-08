@@ -1,0 +1,84 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 20.51.14.16 DATE= 25.280
+
+ COMMENTS  ---------------------------------------------------------------------*         C  TIME=20.51.14.16 DATE=25.280
+ COMMENTS                                                                       *         C  TIME=20.51.14.16 DATE=25.280
+ COMMENTS  ---+----1----+----2----+----3----+----4----+----5----+----6----+----7*         C  TIME=20.51.14.16 DATE=25.280
+ STATUS INPUT: S 1 1 1 1 1    SKILL
+ 0002 OF 0003  PCB SELECTED =           DBD SELECTED = SKILL
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     FIELD=SKCLASS   OPER==       VALUE=BU115   )
+               SEG=NAME      FIELD=FULNAM    OPER==       VALUE=AKERSON, LAWRENCE R.
+                                                                      )
+               SEG=EDUC      COMND=L
+                             FIELD=EDUID     OPER==       VALUE=HARVARD           )
+
+ SEGMENT     =(HARVARD           MBUSINESS ADM.                                           )
+
+ COMP                          RET CODE=OK
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      HARVARD           )
+ COMMENTS                                                                                 C  TIME=20.51.14.65 DATE=25.280
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=D
+                             FIELD=SKCLASS   OPER==       VALUE=BU115   )
+               SEG=NAME      COMND=DP
+                             FIELD=FULNAM    OPER==       VALUE=AKERSON, LAWRENCE R.
+                                                                      )
+               SEG=EXPR      COMND=F
+
+ SEGMENT     =(BU115   HUMAN FACTORS-DESIGN                                                              AKERSON, L)
+              (AWRENCE R.                                                                                          )
+              (          05A100-30436    1000)
+
+ COMP                          RET CODE=OK
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      1000)
+ COMMENTS                                                                                 C  TIME=20.51.14.65 DATE=25.280
+ ........................................................................................................................
+ CALL=GNP      SEG=EXPR
+
+ SEGMENT     =(06A200-10242    2000)
+1
+ COMP                          RET CODE=OK
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      2000)
+ ........................................................................................................................
+ CALL=GNP      SEG=EXPR
+
+ SEGMENT     =(09A200-41051    3000)
+
+ COMP                          RET CODE=OK
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      3000)
+ ........................................................................................................................
+ CALL=GNP      SEG=EXPR
+
+ SEGMENT     =(10A300-2        4000)
+
+ COMP                          RET CODE=OK
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      4000)
+ ........................................................................................................................
+ CALL=GNP      SEG=EXPR
+
+    NO SEGMENT RETURNED.
+
+ COMP NE                       RET CODE=OK
+ ------------------------------------------------------------------------------------------------------------------------
+ DBPCB   LEV=02  SEG=NAME      RET CODE=GE  KFDB LEN=0050  KEY FDB=(BU115   AKERSON, LAWRENCE R.                      )
+ RUN ABORTED BECAUSE ABORT REQUESTED IN COMPARE INPUT.
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         2         0         4         0         0         0         0         0         0         6
+ TOTAL NUMBER OF CALLS =         6  TOTAL NUMBER EQUAL COMPARES =         5  TOTAL NUMBER UNEQUAL COMPARES =         1
+
+ PSB= PSB1CBL   STOP TIME= 20.51.14.65 DATE= 25.280
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

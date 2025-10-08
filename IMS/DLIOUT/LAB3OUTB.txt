@@ -1,0 +1,64 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 19.58.54.34 DATE= 25.280
+
+ COMMENTS  ---------------------------------------------------------------------*         C  TIME=19.58.54.34 DATE=25.280
+ COMMENTS                                                                       *         C  TIME=19.58.54.34 DATE=25.280
+ COMMENTS  ---+----1----+----2----+----3----+----4----+----5----+----6----+----7*         C  TIME=19.58.54.34 DATE=25.280
+ STATUS INPUT: S 1 1 1 1 1    SKILL
+ 0002 OF 0003  PCB SELECTED =           DBD SELECTED = SKILL
+ ........................................................................................................................
+ CALL=ISRT     SEG=SKILL     FIELD=SKCLASS   OPER==       VALUE=BU115   )
+               SEG=NAME      FIELD=FULNAM    OPER==       VALUE=AKERSON, LAWRENCE R.
+                                                                      )
+               SEG=EDUC
+
+ SEGMENT     =(Z45864            MSYSTEMS (INITIAL DATA)               )
+
+ COMP                          RET CODE=
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      Z45864            )
+ COMMENTS                                                                                 C  TIME=19.58.54.83 DATE=25.280
+ ........................................................................................................................
+ CALL=GHU      SEG=SKILL     FIELD=SKCLASS   OPER==       VALUE=BU115   )
+               SEG=NAME      FIELD=FULNAM    OPER==       VALUE=AKERSON, LAWRENCE R.
+                                                                      )
+               SEG=EDUC      FIELD=EDUID     OPER==       VALUE=Z45864            )
+
+ SEGMENT     =(Z45864            MSYSTEMS (INITIAL DATA)                                  )
+
+ COMP                          RET CODE=
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      Z45864            )
+ COMMENTS                                                                                 C  TIME=19.58.54.83 DATE=25.280
+ ........................................................................................................................
+ CALL=REPL
+
+ SEGMENT     =(Z45864            MUNIVERSE (REPLACED DATA)             )
+
+ COMP                          RET CODE=
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      Z45864            )
+ COMMENTS                                                                                 C  TIME=19.58.54.83 DATE=25.280
+ ........................................................................................................................
+1CALL=DLET
+
+ SEGMENT     =(Z45864            MUNIVERSE (REPLACED DATA)             )
+
+ COMP                          RET CODE=
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (BU115   AKERSON, LAWRENCE R.                      Z45864            )
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         1         0         0         1         1         1         4
+ TOTAL NUMBER OF CALLS =         4  TOTAL NUMBER EQUAL COMPARES =         4  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB1CBL   STOP TIME= 19.58.54.83 DATE= 25.280
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

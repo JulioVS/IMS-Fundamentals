@@ -25,6 +25,9 @@
 //             DCB=(RECFM=VB,BLKSIZE=4096,LRECL=4092,BUFNO=5)
 //G.PRINTDD  DD SYSOUT=*                                   FOR DLT0!
 //G.SYSIN    DD *
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
 S 1 1 1 1 1    IVPDB1
 L        ISRT  A1111111
 L        DATA  GROSSKOPF MARKUS    1-111-1111ZP90210
