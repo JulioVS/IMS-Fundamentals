@@ -1,19 +1,26 @@
-***********************************************************************
+*--------------------------------------------------------------------7*
 *                                                                     *
 *---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
          DBD   NAME=SKILL,ACCESS=HDAM,RMNAME=(DFSHDC40,2,20,1000)
          DATASET DD1=SKILL
+*
          SEGM  NAME=SKILL,BYTES=90,PARENT=0
          FIELD NAME=(SKCLASS,SEQ,U),BYTES=8,START=1
+*
          SEGM  NAME=NAME,BYTES=120,PARENT=SKILL
          FIELD NAME=(FULNAM,SEQ,U),BYTES=42,START=1
+*
          SEGM  NAME=ADDRESS,BYTES=200,PARENT=NAME
+*
          SEGM  NAME=PAYROLL,BYTES=100,PARENT=NAME
          FIELD NAME=(DATASEQ,SEQ,U),BYTES=7,START=1
+*
          SEGM  NAME=EXPR,BYTES=20,PARENT=NAME,RULES=(,LAST)
          FIELD NAME=(CLASSIF,SEQ,M),BYTES=4,START=17
+*
          SEGM  NAME=EDUC,BYTES=75,PARENT=NAME,RULES=(,LAST)
          FIELD NAME=(EDUID,SEQ,M),BYTES=18,START=1
+*
          DBDGEN
          FINISH
          END

@@ -1,19 +1,26 @@
-***********************************************************************
+*--------------------------------------------------------------------7*
 *                                                                     *
 *---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
          DBD   NAME=DUMMY,ACCESS=HDAM,RMNAME=(DFSHDC40,2,20,1000)
          DATASET DD1=DUMMY
+*
          SEGM  NAME=DUMMY1,BYTES=90,PARENT=0
          FIELD NAME=(SKCLASS,SEQ,U),BYTES=8,START=1
+*
          SEGM  NAME=DUMMY2,BYTES=120,PARENT=DUMMY1
          FIELD NAME=(FULNAM,SEQ,U),BYTES=42,START=1
+*
          SEGM  NAME=DUMMY3,BYTES=200,PARENT=DUMMY2
+*
          SEGM  NAME=DUMMY4,BYTES=100,PARENT=DUMMY2
          FIELD NAME=(DATASEQ,SEQ,U),BYTES=7,START=1
+*
          SEGM  NAME=DUMMY5,BYTES=20,PARENT=DUMMY2
          FIELD NAME=(CLASSIF,SEQ,M),BYTES=4,START=17
+*
          SEGM  NAME=DUMMY6,BYTES=75,PARENT=DUMMY2
          FIELD NAME=(EDUID,SEQ,M),BYTES=18,START=1
+*
          DBDGEN
          FINISH
          END

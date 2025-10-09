@@ -5,7 +5,7 @@
 //SETLIB   JCLLIB ORDER=DFSF10.PROCLIB
 //*
 //IMSDLI   EXEC DLIBATCH,
-//             MBR='IMSLABS',                    IMS DB LABS PROGRAM
+//             MBR='IMSLABS1',                   IMS DB LABS PROGRAM
 //             PSB='PSB1CBL',                             MY OWN PSB
 //             DBRC='N',                                   NO RECON!
 //             IRLM='N'                                    NO LOCKS!
