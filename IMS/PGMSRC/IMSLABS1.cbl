@@ -14,6 +14,7 @@
       ****************************************************************
       *
        77 LAB1-COUNTER            PIC 9(02).
+       77 LAB4-COUNTER            PIC 9(02).
       *
       ****************************************************************
       * SYSIN INPUT DATA
@@ -137,6 +138,10 @@
              10 SKCLASS           PIC X(08).
              10 FULNAM            PIC X(42).
              10 EDUID             PIC X(18).
+             10 ALT-KEY REDEFINES EDUID.
+                15 CLASSIF        PIC X(04).
+                15 FILLER         PIC X(14).
+
       *
        PROCEDURE DIVISION.
       *
@@ -258,7 +263,7 @@
                    END-IF
            END-PERFORM.
 
-           DISPLAY '   NUMBER OF DEPENDENT SEGMENTS = ' LAB1-COUNTER.
+           DISPLAY '=> NUMBER OF DEPENDENT SEGMENTS = ' LAB1-COUNTER.
       *
       ****************************************************************
       * LAB 1 LOGIC GOES HERE.
@@ -290,7 +295,7 @@
       *    WE NEED AN UNQUALIFIED SSA FOR INSERT CALLS!
       *    THUS, THE 'MOVE A SPACE TO POSITION 9 OF THE SSA' TRICK
       *    IS USED :)
-           MOVE ' ' TO COMMAND-CODES-START OF SSA-QUAL-EDUC.
+           MOVE ' ' TO QUAL-START OF SSA-QUAL-EDUC.
 
       *    THE CALL TO INSERT THE NEW 'EDUC' SEGMENT.
            CALL 'CBLTDLI' USING ISRT,
@@ -321,7 +326,7 @@
       *    THE 'HOLD' OPTION BY BUILDING A NOW-QUALIFIED SSA AND
       *    ISSUING A 'GHU' DL/I CALL.
 
-           MOVE '*' TO COMMAND-CODES-START OF SSA-QUAL-EDUC.
+           MOVE '(' TO QUAL-START OF SSA-QUAL-EDUC.
            MOVE 'Z45864' TO QUAL-VALUE OF SSA-QUAL-EDUC.
 
            CALL 'CBLTDLI' USING GHU,
@@ -403,7 +408,84 @@
       *---------------------------------------------------------------
       *
        LAB4-START.
-           CONTINUE.
+      *    ----- 1. SEEK 'HARVARD' EDUC SEGMENT -----
+
+      *    USE THE SKILL AND NAME KEYS FROM SYSIN, SEEK A 'HARVARD'
+      *    'EDUC' SEGMENT, SET PARENTAGE ON 'NAME' FOR FURTHER
+      *    PROCESSING.
+           MOVE KSKILL OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-SKILL.
+           MOVE KNAME OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-NAME.
+           MOVE 'P---' TO COMMAND-CODES IN SSA-QUAL-NAME.
+
+           INITIALIZE QUAL-VALUE OF SSA-QUAL-EDUC.
+           MOVE 'HARVARD' TO QUAL-VALUE OF SSA-QUAL-EDUC.
+
+           CALL 'CBLTDLI' USING GU,
+                                SKILL-PCB,
+                                IOAREA-EDUC,
+                                SSA-QUAL-SKILL,
+                                SSA-QUAL-NAME,
+                                SSA-QUAL-EDUC.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   EDUID = ' EDUID IN KFBAREA-DETAIL.
+
+
+      *    ----- 2. SEEK HIS FIRST 'EXPR' SEGMENT -----
+
+      *    RETRIEVE THE FIRST 'EXPR' SEGMENT UNDER THE PREVIOUSLY
+      *    ESTABLISHED 'NAME' PARENTAGE.
+           MOVE 'F---' TO COMMAND-CODES IN SSA-QUAL-EXPR.
+           MOVE ' ' TO QUAL-START IN SSA-QUAL-EXPR.
+
+           CALL 'CBLTDLI' USING GNP,
+                                SKILL-PCB,
+                                IOAREA-EXPR,
+                                SSA-QUAL-EXPR.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> FIRST *EXPR* SEGMENT SUCCESSFULLY RETRIEVED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   CLASS = ' CLASSIF IN KFBAREA-DETAIL.
+
+           MOVE 1 TO LAB4-COUNTER.
+
+
+      *    ----- 3. COUNT FURTHER 'EXPR' SEGMENTS -----
+
+      *    FOR THIS I WILL USE *UNQUALIFIED* CALLS, THAT IS, PLAIN
+      *    'GNP' ONES TO COUNT THE OTHER 'EXPR' SEGMENTS UNTIL A
+      *    'DIFFRENT TYPE OF SEGMENT' (GK) OR 'NO MORE SEGMENTS
+      *    UNDER PARENT' (GE) STATUS IS RETURNED.
+
+      *    THUS, NO NEED TO RESTORE THE COMMAND CODES OR QUALIFIERS
+      *    IN THE 'EXPR' SSA, SINCE IT WON'T BE USED!
+
+           PERFORM UNTIL
+              STATUS-CODE
+              IN SKILL-PCB = 'GK' OR = 'GA' OR = 'GB' OR = 'GE'
+                   CALL 'CBLTDLI' USING GNP,
+                                        SKILL-PCB,
+                                        IOAREA-EXPR
+
+                   IF STATUS-CODE OF SKILL-PCB = '  '
+                      ADD 1 TO LAB4-COUNTER
+                   END-IF
+           END-PERFORM.
+
+           DISPLAY '=> NUMBER OF *EXPR* SEGMENTS = ' LAB4-COUNTER.
       *
       ****************************************************************
       * LAB 4 LOGIC GOES HERE.

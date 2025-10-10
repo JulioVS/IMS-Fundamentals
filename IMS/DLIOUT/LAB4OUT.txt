@@ -1,0 +1,83 @@
+ *
+ ******************************************
+ * LAB 4 OUTPUT STARTS HERE *
+ ******************************************
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CBU115   AKERSON, LAWRENCE R.                      1000
+ *
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = HARVARD
+ => FIRST *EXPR* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    CLASS = 1000
+ => NUMBER OF *EXPR* SEGMENTS = 04
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CED003   FERRIS, MONA J.                           1000
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 02
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = NAME
+ KFBAREA-KEY-LENGTH = 00050
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = ED003   FERRIS, MONA J.                           HARVARD
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CKB750   AINLAY, HOWARD                            2220
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 01
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = SKILL
+ KFBAREA-KEY-LENGTH = 00008
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = KB750   FERRIS, MONA J.                           HARVARD
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CBC290   JAMORA, JOSEPH W.                         1000
+ *
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BC290
+    NAME  = JAMORA, JOSEPH W.
+    EDUID = HARVARD
+ => FIRST *EXPR* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BC290
+    NAME  = JAMORA, JOSEPH W.
+    CLASS = 1000
+ => NUMBER OF *EXPR* SEGMENTS = 02
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ E
+ *
+ *
+ ******************************************
+ * END OF OUTPUT *
+ ******************************************
+ *
