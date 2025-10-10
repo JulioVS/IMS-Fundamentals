@@ -1,0 +1,30 @@
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+S 1 1 1 1 1    SKILL9
+U Call 1
+L        GU    SKILL   *P(SKCLASS = ANALYST )                          X
+               NAME    *D(DEPT    = 021*PLANTNO = 06)                  X
+               EDUC    *-(EDUID   = ROCKER+MAJOR   = CHEM)
+U Call 2
+L        GU    SKILL   *-(SKCLASS = ANALYST )                          X
+               NAME    *P(SERIAL  = 016638)                            X
+               EDUC
+U Call 3
+L        GU    SKILL   *DP(SKCLASS = ANALYST )                         X
+               NAME    *D-(LASTNM  = SMITH         SEGM #5         )   X
+               EDUC
+U Call 4
+L        GU    SKILL   *P(SKCLASS = ANALYST )                          X
+               NAME    *P(SERIAL  = 016638)                            X
+               EXPR
+U Call 5A
+L        GU    SKILL   *D(SKCLASS = ANALYST )                          X
+               NAME                                                    X
+               EXPR
+U Call 5B
+L        GN    NAME    *DV                                             X
+               EDUC    *--(YEARGRAD= 02)
+U Call 5C
+L        GN    NAME    *-V                                             X
+               EDUC    *--(YEARGRAD= 02)

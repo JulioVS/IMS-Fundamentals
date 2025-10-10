@@ -1,0 +1,95 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 09.35.44.47 DATE= 25.283
+
+ COMMENTS  ---------------------------------------------------------------------*         C  TIME=09.35.44.48 DATE=25.283
+ COMMENTS                                                                       *         C  TIME=09.35.44.48 DATE=25.283
+ COMMENTS  ---+----1----+----2----+----3----+----4----+----5----+----6----+----7*         C  TIME=09.35.44.48 DATE=25.283
+ STATUS INPUT: S 1 1 1 1 1    SKILL9
+ 0003 OF 0003  PCB SELECTED =           DBD SELECTED = SKILL9
+ ........................................................................................................................
+ CALL=GU
+
+ SEGMENT     =(ANALYST  100000 124000 SENIOR SYSTEMS ANALYST   SEGM #1     )
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=    KFDB LEN=0008  KEY FDB=(ANALYST )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(014430 010 06 JONES         SEGM #2                         )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0014  KEY FDB=(ANALYST 014430)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(RW  08 01 123-F-001         SEGM #3)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0017  KEY FDB=(ANALYST 014430RW )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(BOLTON ECON BA 02 04        SEGM #4)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0020  KEY FDB=(ANALYST 014430BOLTON)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(016638 021 06 SMITH         SEGM #5                         )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=GA  KFDB LEN=0014  KEY FDB=(ANALYST 016638)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(NRW 03 01 123-F-003         SEGM #6)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0017  KEY FDB=(ANALYST 016638NRW)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(ROCKER CHEM BS 03 04        SEGM #7)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=GK  KFDB LEN=0020  KEY FDB=(ANALYST 016638ROCKER)
+ ........................................................................................................................
+ CALL=GN
+
+1SEGMENT     =(WOLTON ECON MA 08 02        SEGM #8)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 016638WOLTON)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(ARTIST   079000 098000 STAFF ARTIST             SEGM #9     )
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=GA  KFDB LEN=0008  KEY FDB=(ARTIST  )
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(018925 013 01 ZEBRA         SEGM #A                         )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0014  KEY FDB=(ARTIST  018925)
+ ........................................................................................................................
+ CALL=GN
+
+ SEGMENT     =(OJ  03 04 456-F-003         SEGM #B)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0017  KEY FDB=(ARTIST  018925OJ )
+ ........................................................................................................................
+ CALL=GN
+
+    NO SEGMENT RETURNED.
+
+ DBPCB   LEV=00  SEG=          RET CODE=GB  KFDB LEN=0000
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         1        11         0         0         0         0         0         0         0        12
+ TOTAL NUMBER OF CALLS =        12  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 09.35.44.98 DATE= 25.283
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

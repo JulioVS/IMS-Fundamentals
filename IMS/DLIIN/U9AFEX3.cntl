@@ -1,0 +1,41 @@
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+S 1 1 1 1 1    SKILL9
+U
+U              --- Assume 'LOAD' mode ---
+U                (Re-create VSAM first)
+U
+U Call 1A
+L        ISRT  SKILL   *D                                              X
+               NAME    *D                                              X
+               EXPR
+L        DATA  ANALYST  100000 124000 SENIOR SYSTEMS ANALYST   SEGM #1 X
+         CONT      014430 010 06 JONES         SEGM #2                 X
+         CONT          RW  08 01 123-F-001         SEGM #3
+U
+U Call 1B
+L        ISRT  EDUC
+L        DATA  BOLTON ECON BA 02 04        SEGM #4
+U
+U Call 1C
+L        ISRT  NAME    *D                                              X
+               EXPR
+L        DATA  016638 021 06 SMITH         SEGM #5                     X
+         CONT      NRW 03 01 123-F-003         SEGM #6
+U
+U Call 1D
+L        ISRT  EDUC
+L        DATA  ROCKER CHEM BS 03 04        SEGM #7
+U
+U Call 1E
+L        ISRT  EDUC
+L        DATA  WOLTON ECON MA 08 02        SEGM #8
+U
+U Call 1F
+L        ISRT  SKILL   *D                                              X
+               NAME                                                    X
+               EXPR
+L        DATA  ARTIST   079000 098000 STAFF ARTIST             SEGM #9 X
+         CONT      018925 013 01 ZEBRA         SEGM #A                 X
+         CONT          OJ  03 04 456-F-003         SEGM #B

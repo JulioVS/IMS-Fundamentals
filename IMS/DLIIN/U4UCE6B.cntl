@@ -12,11 +12,6 @@ U
 U Call 11A
 L        GHU   COURSE  (CODE    = CM17)                                X
                NAME    (LASTNM  = JONES)
-U
-U     ----------------------------------------------------------
-U      I can't manipulate the IOAREA from here, so this exercise
-U      cannot be done by using the DL/I Test program!
-U     ----------------------------------------------------------
-U
 U Call 11B
-L        DLET
+L        DLET                                                          X
+         DATA  ANNA                   SEGM #2

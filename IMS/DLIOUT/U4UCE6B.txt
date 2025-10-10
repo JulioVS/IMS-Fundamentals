@@ -1,4 +1,45 @@
-      ----------------------------------------------------------
-       I can't manipulate the IOAREA from here, so this exercise
-       cannot be done by using the DL/I Test program!
-      ----------------------------------------------------------
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 08.09.22.56 DATE= 25.283
+
+ COMMENTS  ---------------------------------------------------------------------*         C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS                                                                       *         C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS  ---+----1----+----2----+----3----+----4----+----5----+----6----+----7*         C  TIME=08.09.22.57 DATE=25.283
+ STATUS INPUT: S 1 1 1 1 1    COURSE
+ 0002 OF 0003  PCB SELECTED =           DBD SELECTED = COURSE
+ COMMENTS                                                                                 C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS                --- Assume 'UPDATE' mode ---                                     C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS                   (Use Procopt "A" PSB!)                                        C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS                                                                                 C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS                --- Assume SG#1-5 exist  ---                                     C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS                     (Fully loaded DB)                                           C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS                                                                                 C  TIME=08.09.22.57 DATE=25.283
+ COMMENTS   Call 11A                                                                      C  TIME=08.09.22.57 DATE=25.283
+ ........................................................................................................................
+ CALL=GHU      SEG=COURSE    FIELD=CODE      OPER==       VALUE=CM17)
+               SEG=NAME      FIELD=LASTNM    OPER==       VALUE=JONES)
+
+ SEGMENT     =(ANNAJONES              SEGM #2)
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0009  KEY FDB=(CM17JONES)
+ COMMENTS   Call 11B                                                                      C  TIME=08.09.23.07 DATE=25.283
+ ........................................................................................................................
+ CALL=DLET
+
+ SEGMENT     =(ANNA                   SEGM #2                          )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=DA  KFDB LEN=0009  KEY FDB=(CM17JONES)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         0         0         0         1         0         0         0         1         0         2
+ TOTAL NUMBER OF CALLS =         2  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 08.09.23.07 DATE= 25.283
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

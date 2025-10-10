@@ -1,0 +1,24 @@
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+S 1 1 1 1 1    SKILL9
+U Call 1
+L        GU    SKILL   (SKCLASS = ANALYST )                            X
+               NAME    (SERIAL  = 016638)                              X
+               EDUC    *L
+U Call 2
+L        GU    SKILL   *D                                              X
+               NAME    *DL                                             X
+               EDUC    *L
+U Call 3
+L        GU    SKILL   *D(SKCLASS = ANALYST )                          X
+               NAME    (SERIAL  = 016638)                              X
+               EDUC
+U Call 4
+L        GU    SKILL   (SALRYLOW>=079000*SALYHIGH<=098000)
+U Call 5A
+L        GU    SKILL   (SKCLASS = ANALYST )
+U Call 5B
+L        GNP   NAME
+U Call 5C
+L        GNP   NAME

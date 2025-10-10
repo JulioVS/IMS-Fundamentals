@@ -1,0 +1,117 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 09.25.08.62 DATE= 25.283
+
+ COMMENTS  ---------------------------------------------------------------------*         C  TIME=09.25.08.63 DATE=25.283
+ COMMENTS                                                                       *         C  TIME=09.25.08.63 DATE=25.283
+ COMMENTS  ---+----1----+----2----+----3----+----4----+----5----+----6----+----7*         C  TIME=09.25.08.63 DATE=25.283
+ STATUS INPUT: S 1 1 1 1 1    SKILL9
+ 0003 OF 0003  PCB SELECTED =           DBD SELECTED = SKILL9
+ COMMENTS   Call 1A                                                                       C  TIME=09.25.08.63 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=P
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME
+
+ SEGMENT     =(014430 010 06 JONES         SEGM #2                         )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0014  KEY FDB=(ANALYST 014430)
+ COMMENTS   Call 1B                                                                       C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GNP      SEG=NAME
+
+ SEGMENT     =(016638 021 06 SMITH         SEGM #5                         )
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=    KFDB LEN=0014  KEY FDB=(ANALYST 016638)
+ COMMENTS   Call 1C                                                                       C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GNP      SEG=NAME      COMND=-
+                             FIELD=SERIAL    OPER=>       VALUE=014430)
+
+    NO SEGMENT RETURNED.
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=GE  KFDB LEN=0008  KEY FDB=(ANALYST )
+ COMMENTS   Call 1D                                                                       C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GNP
+
+    NO SEGMENT RETURNED.
+
+ DBPCB   LEV=01  SEG=SKILL     RET CODE=GE  KFDB LEN=0008  KEY FDB=(ANALYST )
+ COMMENTS   Call 1E                                                                       C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GNP      SEG=NAME      COMND=F
+               SEG=EDUC
+
+ SEGMENT     =(BOLTON ECON BA 02 04        SEGM #4)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 014430BOLTON)
+ COMMENTS                                                                                 C  TIME=09.25.09.13 DATE=25.283
+ COMMENTS   Call 2                                                                        C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=---
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME      COMND=DLP
+1              SEG=EDUC
+
+ SEGMENT     =(016638 021 06 SMITH         SEGM #5                         ROCKER CHEM BS 03 04        SEGM #7)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 016638ROCKER)
+ COMMENTS                                                                                 C  TIME=09.25.09.13 DATE=25.283
+ COMMENTS   Call 3                                                                        C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=-
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME      COMND=D
+               SEG=EDUC      COMND=-
+                             FIELD=MAJOR     OPER==       VALUE=ECON)
+
+ SEGMENT     =(014430 010 06 JONES         SEGM #2                         BOLTON ECON BA 02 04        SEGM #4)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 014430BOLTON)
+ COMMENTS                                                                                 C  TIME=09.25.09.13 DATE=25.283
+ COMMENTS   Call 4A                                                                       C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GN       SEG=SKILL     COMND=-
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME      COMND=D
+               SEG=EDUC      COMND=-
+                             FIELD=MAJOR     OPER==       VALUE=ECON*
+                             FIELD=DEGREE    OPER==       VALUE=MA)
+
+ SEGMENT     =(016638 021 06 SMITH         SEGM #5                         WOLTON ECON MA 08 02        SEGM #8)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 016638WOLTON)
+ COMMENTS   Call 4B                                                                       C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GN       SEG=SKILL     COMND=U
+               SEG=NAME      COMND=DF
+               SEG=EDUC      COMND=F-
+                             FIELD=MAJOR     OPER==       VALUE=ECON*
+                             FIELD=DEGREE    OPER==       VALUE=MA)
+
+ SEGMENT     =(016638 021 06 SMITH         SEGM #5                         WOLTON ECON MA 08 02        SEGM #8)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 016638WOLTON)
+ COMMENTS                                                                                 C  TIME=09.25.09.13 DATE=25.283
+ COMMENTS   Call 5                                                                        C  TIME=09.25.09.13 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=EXPR      COMND=C(ANALYST 016638NRW)
+
+ SEGMENT     =(NRW 03 01 123-F-003         SEGM #6)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0017  KEY FDB=(ANALYST 016638NRW)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         4         2         4         0         0         0         0         0         0        10
+ TOTAL NUMBER OF CALLS =        10  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 09.25.09.13 DATE= 25.283
+
+1
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

@@ -1,0 +1,99 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 09.15.39.78 DATE= 25.283
+
+ COMMENTS  ---------------------------------------------------------------------*         C  TIME=09.15.39.79 DATE=25.283
+ COMMENTS                                                                       *         C  TIME=09.15.39.79 DATE=25.283
+ COMMENTS  ---+----1----+----2----+----3----+----4----+----5----+----6----+----7*         C  TIME=09.15.39.79 DATE=25.283
+ STATUS INPUT: S 1 1 1 1 1    SKILL9
+ 0003 OF 0003  PCB SELECTED =           DBD SELECTED = SKILL9
+ COMMENTS   Call 1                                                                        C  TIME=09.15.39.79 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=P
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME      COMND=D
+                             FIELD=DEPT      OPER==       VALUE=021*
+                             FIELD=PLANTNO   OPER==       VALUE=06)
+               SEG=EDUC      COMND=-
+                             FIELD=EDUID     OPER==       VALUE=ROCKER+
+                             FIELD=MAJOR     OPER==       VALUE=CHEM)
+
+ SEGMENT     =(016638 021 06 SMITH         SEGM #5                         ROCKER CHEM BS 03 04        SEGM #7)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 016638ROCKER)
+ COMMENTS   Call 2                                                                        C  TIME=09.15.40.29 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=-
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME      COMND=P
+                             FIELD=SERIAL    OPER==       VALUE=016638)
+               SEG=EDUC
+
+ SEGMENT     =(ROCKER CHEM BS 03 04        SEGM #7)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 016638ROCKER)
+ COMMENTS   Call 3                                                                        C  TIME=09.15.40.29 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=DP
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME      COMND=D-
+                             FIELD=LASTNM    OPER==       VALUE=SMITH         SEGM #5         )
+               SEG=EDUC
+
+ SEGMENT     =(ANALYST  100000 124000 SENIOR SYSTEMS ANALYST   SEGM #1     016638 021 06 SMITH         SEGM #5     )
+              (                    ROCKER CHEM BS 03 04        SEGM #7)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 016638ROCKER)
+ COMMENTS   Call 4                                                                        C  TIME=09.15.40.29 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=P
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME      COMND=P
+                             FIELD=SERIAL    OPER==       VALUE=016638)
+               SEG=EXPR
+
+1SEGMENT     =(NRW 03 01 123-F-003         SEGM #6)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0017  KEY FDB=(ANALYST 016638NRW)
+ COMMENTS   Call 5A                                                                       C  TIME=09.15.40.29 DATE=25.283
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=D
+                             FIELD=SKCLASS   OPER==       VALUE=ANALYST )
+               SEG=NAME
+               SEG=EXPR
+
+ SEGMENT     =(ANALYST  100000 124000 SENIOR SYSTEMS ANALYST   SEGM #1     RW  08 01 123-F-001         SEGM #3)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0017  KEY FDB=(ANALYST 014430RW )
+ COMMENTS   Call 5B                                                                       C  TIME=09.15.40.29 DATE=25.283
+ ........................................................................................................................
+ CALL=GN       SEG=NAME      COMND=DV
+               SEG=EDUC      COMND=--
+                             FIELD=YEARGRAD  OPER==       VALUE=02)
+
+ SEGMENT     =(014430 010 06 JONES         SEGM #2                         BOLTON ECON BA 02 04        SEGM #4)
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0020  KEY FDB=(ANALYST 014430BOLTON)
+ COMMENTS   Call 5C                                                                       C  TIME=09.15.40.29 DATE=25.283
+ ........................................................................................................................
+ CALL=GN       SEG=NAME      COMND=-V
+               SEG=EDUC      COMND=--
+                             FIELD=YEARGRAD  OPER==       VALUE=02)
+
+    NO SEGMENT RETURNED.
+
+ DBPCB   LEV=02  SEG=NAME      RET CODE=GE  KFDB LEN=0014  KEY FDB=(ANALYST 014430)
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         5         2         0         0         0         0         0         0         0         7
+ TOTAL NUMBER OF CALLS =         7  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB3CBL   STOP TIME= 09.15.40.29 DATE= 25.283
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+

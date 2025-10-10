@@ -1,0 +1,38 @@
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+S 1 1 1 1 1    SKILL9
+U Call 1A
+L        GU    SKILL   *P(SKCLASS = ANALYST )                          X
+               NAME
+U Call 1B
+L        GNP   NAME
+U Call 1C
+L        GNP   NAME    *-(SERIAL  > 014430)
+U Call 1D
+L        GNP
+U Call 1E
+L        GNP   NAME    *F                                              X
+               EDUC
+U
+U Call 2
+L        GU    SKILL   *---(SKCLASS = ANALYST )                        X
+               NAME    *DLP                                            X
+               EDUC
+U
+U Call 3
+L        GU    SKILL   *-(SKCLASS = ANALYST )                          X
+               NAME    *D                                              X
+               EDUC    *-(MAJOR   = ECON)
+U
+U Call 4A
+L        GN    SKILL   *-(SKCLASS = ANALYST )                          X
+               NAME    *D                                              X
+               EDUC    *-(MAJOR   = ECON*DEGREE  = MA)
+U Call 4B
+L        GN    SKILL   *U                                              X
+               NAME    *DF                                             X
+               EDUC    *F-(MAJOR   = ECON*DEGREE  = MA)
+U
+U Call 5
+L        GU    EXPR    *C(ANALYST 016638NRW)

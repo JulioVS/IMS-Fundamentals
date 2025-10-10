@@ -1,0 +1,23 @@
+U---------------------------------------------------------------------*
+U                                                                     *
+U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+S 1 1 1 1 1    SKILL9
+U Call 1A
+L        GU    SKILL   (SKCLASS = ANALYST )
+U Call 1B
+L        GNP
+U Call 1C
+L        GNP
+U Call 1D
+L        GNP
+U
+U Call 2A
+L        GU    SKILL   (SKCLASS = ANALYST )
+U Call 2B
+L        GNP   NAME    *L
+U Call 2C
+L        GNP   NAME    *F
+U Call 2D
+L        GNP   NAME    *FL(PLANTNO = 06)
+U Call 2E
+L        GNP   EXPR    *F(CLASSIF = RW )
