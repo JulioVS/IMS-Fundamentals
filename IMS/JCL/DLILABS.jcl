@@ -1,4 +1,4 @@
-//MYIMSRUN  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
+//DLILABSJ  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
 //*
 //*   IMS DB APP PROGRAMMING SKELETON
 //*
@@ -29,13 +29,13 @@
 //G.SYSPRINT DD SYSOUT=*
 //G.SYSIN    DD *
 *---------------------------------------------------------------
-* LAB 1 INPUT
+* LAB 4 INPUT
 *---------------------------------------------------------------
-1
-GBU115   AKERSON, LAWRENCE R.                      1000
-GED003   FERRIS, MONA J.                           1000
-GKB750   AINLAY, HOWARD                            2220
-GBC290   JAMORA, JOSEPH W.                         1000
+4
+CBU115   AKERSON, LAWRENCE R.                      1000
+CED003   FERRIS, MONA J.                           1000
+CKB750   AINLAY, HOWARD                            2220
+CBC290   JAMORA, JOSEPH W.                         1000
 *---------------------------------------------------------------
 * LAST INPUT
 *---------------------------------------------------------------
