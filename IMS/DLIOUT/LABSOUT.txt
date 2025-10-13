@@ -1,0 +1,307 @@
+ *
+ ******************************************
+ * LAB 1 OUTPUT STARTS HERE *
+ ******************************************
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GBU115   AKERSON, LAWRENCE R.                      1000
+ *
+ => RECORD SUCCESSFULLY RETRIEVED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+ => NUMBER OF DEPENDENT SEGMENTS = 05
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GED003   FERRIS, MONA J.                           1000
+ *
+ => RECORD SUCCESSFULLY RETRIEVED
+    SKILL = ED003
+    NAME  = FERRIS, MONA J.
+ => NUMBER OF DEPENDENT SEGMENTS = 07
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GKB750   AINLAY, HOWARD                            2220
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 01
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = SKILL
+ KFBAREA-KEY-LENGTH = 00008
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = KB750   FERRIS, MONA J.                           BROWN
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ GBC290   JAMORA, JOSEPH W.                         1000
+ *
+ => RECORD SUCCESSFULLY RETRIEVED
+    SKILL = BC290
+    NAME  = JAMORA, JOSEPH W.
+ => NUMBER OF DEPENDENT SEGMENTS = 03
+ *
+ ******************************************
+ * LAB 2 OUTPUT STARTS HERE *
+ ******************************************
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ UBU115   AKERSON, LAWRENCE R.                      1000
+ *
+ => RECORD SUCCESSFULLY INSERTED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY RETRIEVED AND HELD
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY REPLACED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+    DATA  = MUNIVERSE (REPLACED DATA)
+ => RECORD SUCCESSFULLY DELETED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = Z45864
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ UED003   HEBERT, CAMILLE                           1000
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 01
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = SKILL
+ KFBAREA-KEY-LENGTH = 00008
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = ED003   AKERSON, LAWRENCE R.                      Z45864
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ UEK999   LINDHOLM, THOMAS C.                       2000
+ *
+ => RECORD SUCCESSFULLY INSERTED
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY RETRIEVED AND HELD
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+    DATA  = MSYSTEMS (INITIAL DATA)
+ => RECORD SUCCESSFULLY REPLACED
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+    DATA  = MUNIVERSE (REPLACED DATA)
+ => RECORD SUCCESSFULLY DELETED
+    SKILL = EK999
+    NAME  = LINDHOLM, THOMAS C.
+    EDUID = Z45864
+ *
+ ******************************************
+ * LAB 4 OUTPUT STARTS HERE *
+ ******************************************
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CBU115   AKERSON, LAWRENCE R.                      1000
+ *
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    EDUID = HARVARD
+ => FIRST *EXPR* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BU115
+    NAME  = AKERSON, LAWRENCE R.
+    CLASS = 1000
+ => NUMBER OF *EXPR* SEGMENTS = 04
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CED003   FERRIS, MONA J.                           1000
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 02
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = NAME
+ KFBAREA-KEY-LENGTH = 00050
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = ED003   FERRIS, MONA J.                           HARVARD
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CKB750   AINLAY, HOWARD                            2220
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 01
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = SKILL
+ KFBAREA-KEY-LENGTH = 00008
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = KB750   FERRIS, MONA J.                           HARVARD
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ CBC290   JAMORA, JOSEPH W.                         1000
+ *
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BC290
+    NAME  = JAMORA, JOSEPH W.
+    EDUID = HARVARD
+ => FIRST *EXPR* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = BC290
+    NAME  = JAMORA, JOSEPH W.
+    CLASS = 1000
+ => NUMBER OF *EXPR* SEGMENTS = 02
+ *
+ ******************************************
+ * LAB 5 OUTPUT STARTS HERE *
+ ******************************************
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ OBU115   AKERSON, LAWRENCE R.                      1000
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 02
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = NAME
+ KFBAREA-KEY-LENGTH = 00050
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = BU115   AKERSON, LAWRENCE R.                      HARVARD
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ OKB750   FREIDMAN, JACK A.                         1000
+ *
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = KB750
+    NAME  = FREIDMAN, JACK A.
+    EDUID = BROWN
+  > ALL DATA FOLLOWS
+    KB750   PURCHASING APPLICATIONS
+    FREIDMAN, JACK A.
+    BROWN             MARKETING
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY REPLACED
+    SKILL = KB750
+    NAME  = FREIDMAN, JACK A.
+    EDUID = BROWN
+  > ALL DATA FOLLOWS
+    KB750   PURCHASING APPLICATIONS
+    FREIDMAN, JACK A.
+    BROWN             MSYSTEMS (REPLACED DATA)
+ => TARGET *EXPR* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = KB750
+    NAME  = FREIDMAN, JACK A.
+    CLASS = 3000
+  > *EXPR* DATA FOLLOWS
+    01A900-40461    3000
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ OEK999   LINDHOLM, THOMAS C.                       2000
+ *
+ *
+ ****** ERROR ROUTINE - START ***********
+ *
+ DBDNAME = SKILL
+ SEGMENT-LEVEL = 02
+ STATUS-CODE = GE
+ PROCOPT = GP
+ RESERVED = 95536
+ SEGMENT-NAME = NAME
+ KFBAREA-KEY-LENGTH = 00050
+ NUMBER-OF-SENSEGS = 00004
+ KFBAREA = EK999   LINDHOLM, THOMAS C.                       3000N
+ *
+ ****** ERROR ROUTINE - END ***********
+ *
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ OED003   FERRIS, MONA J.                           1000
+ *
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = ED003
+    NAME  = FERRIS, MONA J.
+    EDUID = BROWN
+  > ALL DATA FOLLOWS
+    ED003   MARKETING
+    FERRIS, MONA J.
+    BROWN             MPHILOSOPHY
+ => TARGET *EDUC* SEGMENT SUCCESSFULLY REPLACED
+    SKILL = ED003
+    NAME  = FERRIS, MONA J.
+    EDUID = BROWN
+  > ALL DATA FOLLOWS
+    ED003   MARKETING
+    FERRIS, MONA J.
+    BROWN             MSYSTEMS (REPLACED DATA)
+ => TARGET *EXPR* SEGMENT SUCCESSFULLY RETRIEVED
+    SKILL = ED003
+    NAME  = FERRIS, MONA J.
+    CLASS = 3000
+  > *EXPR* DATA FOLLOWS
+    02F700-601      3000
+ *
+ ****** INPUT CARD FOLLOWS **************
+ *
+ E
+ *
+ *
+ ******************************************
+ * END OF OUTPUT *
+ ******************************************
+ *

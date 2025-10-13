@@ -67,6 +67,14 @@
           05 EDUID                PIC X(18).
           05 EDUC-DATA            PIC X(57).
       *
+       01 IOAREA-SK-NM-ED.
+          05 SKILL-DATA           PIC X(090).
+          05 NAME-DATA            PIC X(120).
+          05    REDEFINES NAME-DATA.
+             10 NAME-LINE         PIC X(090).
+             10 FILLER            PIC X(030).
+          05 EDUC-DATA            PIC X(075).
+      *
       ****************************************************************
       * SSA'S : FULLY QUALIFIED, INCLUDING NULL COMMAND CODES.
       * - COPY FROM YOUR LIBRARY
@@ -410,14 +418,13 @@
        LAB4-START.
       *    ----- 1. SEEK 'HARVARD' EDUC SEGMENT -----
 
-      *    USE THE SKILL AND NAME KEYS FROM SYSIN, SEEK A 'HARVARD'
-      *    'EDUC' SEGMENT, SET PARENTAGE ON 'NAME' FOR FURTHER
+      *    USING THE SKILL AND NAME KEYS FROM SYSIN, SEEK A 'HARVARD'
+      *    'EDUC' SEGMENT AND SET PARENTAGE ON 'NAME' FOR FURTHER
       *    PROCESSING.
            MOVE KSKILL OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-SKILL.
            MOVE KNAME OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-NAME.
            MOVE 'P---' TO COMMAND-CODES IN SSA-QUAL-NAME.
 
-           INITIALIZE QUAL-VALUE OF SSA-QUAL-EDUC.
            MOVE 'HARVARD' TO QUAL-VALUE OF SSA-QUAL-EDUC.
 
            CALL 'CBLTDLI' USING GU,
@@ -502,7 +509,113 @@
       *---------------------------------------------------------------
       *
        LAB5-START.
-           CONTINUE.
+      *    ----- 1. SEEK LAST 'BROWN' EDUC SEGMENT -----
+
+      *    USING THE SKILL AND NAME KEYS FROM SYSIN, SEEK A 'BROWN'
+      *    'EDUC' SEGMENT AND SET PARENTAGE ON 'NAME' FOR FURTHER
+      *    PROCESSING.
+           MOVE KSKILL OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-SKILL.
+           MOVE KNAME OF SYSIN-INPUT TO QUAL-VALUE OF SSA-QUAL-NAME.
+           MOVE 'BROWN' TO QUAL-VALUE OF SSA-QUAL-EDUC.
+
+           MOVE '(' TO QUAL-START IN SSA-QUAL-SKILL.
+           MOVE '(' TO QUAL-START IN SSA-QUAL-NAME.
+           MOVE '(' TO QUAL-START IN SSA-QUAL-EDUC.
+
+      *    ALSO, USE 'PATH' CALL TO RETRIEVE ALL THREE SEGMENTS' DATA.
+           MOVE 'D---' TO COMMAND-CODES IN SSA-QUAL-SKILL.
+           MOVE 'DP--' TO COMMAND-CODES IN SSA-QUAL-NAME.
+           MOVE 'L---' TO COMMAND-CODES IN SSA-QUAL-EDUC.
+
+      *    ALSO, 'HOLD' IT FOR UPDATING THE EDUC PORTION.
+           CALL 'CBLTDLI' USING GHU,
+                                SKILL-PCB,
+                                IOAREA-SK-NM-ED,
+                                SSA-QUAL-SKILL,
+                                SSA-QUAL-NAME,
+                                SSA-QUAL-EDUC.
+      *
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> TARGET *EDUC* SEGMENT SUCCESSFULLY RETRIEVED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   EDUID = ' EDUID IN KFBAREA-DETAIL.
+
+           DISPLAY ' > ALL DATA FOLLOWS'.
+           DISPLAY '   ' SKILL-DATA IN IOAREA-SK-NM-ED.
+           DISPLAY '   ' NAME-LINE IN IOAREA-SK-NM-ED.
+           DISPLAY '   ' EDUC-DATA IN IOAREA-SK-NM-ED.
+
+
+      *    ----- 2. UPDATE EDUC SEGMENT ONLY -----
+
+      *    UPDATE JUST THE 'EDUC' SECTION OF THE 3-SEGMENT IOAREA.
+           MOVE 'N---' TO COMMAND-CODES IN SSA-QUAL-SKILL.
+           MOVE 'N---' TO COMMAND-CODES IN SSA-QUAL-NAME.
+           MOVE '----' TO COMMAND-CODES IN SSA-QUAL-EDUC.
+
+           MOVE 'BROWN             MSYSTEMS (REPLACED DATA)'
+              TO EDUC-DATA OF IOAREA-SK-NM-ED.
+
+           CALL 'CBLTDLI' USING REPL,
+                                SKILL-PCB,
+                                IOAREA-SK-NM-ED.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> TARGET *EDUC* SEGMENT SUCCESSFULLY REPLACED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   EDUID = ' EDUID IN KFBAREA-DETAIL.
+
+           DISPLAY ' > ALL DATA FOLLOWS'.
+           DISPLAY '   ' SKILL-DATA IN IOAREA-SK-NM-ED.
+           DISPLAY '   ' NAME-LINE IN IOAREA-SK-NM-ED.
+           DISPLAY '   ' EDUC-DATA IN IOAREA-SK-NM-ED.
+
+
+      *    ----- 3. SEEK FIRST '3000' EXPR SEGMENT -----
+
+      *    WE WILL USE *UNQUALIFIED* SSA'S THIS TIME SKILL AND NAME.
+           MOVE ' ' TO QUAL-START IN SSA-QUAL-SKILL.
+           MOVE ' ' TO QUAL-START IN SSA-QUAL-NAME.
+
+      *    INSTEAD WE'LL USE THE 'U' COMMAND TO INDICATE "USE EXISTING
+      *    KEY DATA" BECAUSE, WHY NOT? :)
+           MOVE 'U---' TO COMMAND-CODES IN SSA-QUAL-SKILL.
+           MOVE 'U---' TO COMMAND-CODES IN SSA-QUAL-NAME.
+           MOVE 'F---' TO COMMAND-CODES IN SSA-QUAL-EXPR.
+
+      *    AND WE'LL QUALIFY THE EXPR SEGMENT TO CLASSIF '3000'.
+           MOVE '(' TO QUAL-START IN SSA-QUAL-EXPR.
+           MOVE '3000' TO QUAL-VALUE IN SSA-QUAL-EXPR.
+
+           CALL 'CBLTDLI' USING GNP,
+                                SKILL-PCB,
+                                IOAREA-EXPR,
+                                SSA-QUAL-SKILL,
+                                SSA-QUAL-NAME,
+                                SSA-QUAL-EXPR.
+
+           IF STATUS-CODE OF SKILL-PCB NOT = '  '
+              PERFORM ERROR-ROUTINE-START THRU ERROR-ROUTINE-END
+              EXIT PARAGRAPH
+           END-IF.
+
+           DISPLAY '=> TARGET *EXPR* SEGMENT SUCCESSFULLY RETRIEVED'.
+           DISPLAY '   SKILL = ' SKCLASS IN KFBAREA-DETAIL.
+           DISPLAY '   NAME  = ' FULNAM IN KFBAREA-DETAIL.
+           DISPLAY '   CLASS = ' CLASSIF IN KFBAREA-DETAIL.
+
+           DISPLAY ' > *EXPR* DATA FOLLOWS'.
+           DISPLAY '   ' IOAREA-EXPR.
       *
       ****************************************************************
       * LAB 5 LOGIC GOES HERE.
