@@ -1,0 +1,79 @@
+ ************************************************************************************************************************
+
+ IMS   1510  TEST PROGRAM OUTPUT  ** BEGIN TEST ****TIME= 11.49.43.47 DATE= 25.286
+
+ COMMENTS  ---------------------------------------------------------------------*         C  TIME=11.49.43.47 DATE=25.286
+ COMMENTS                                                                       *         C  TIME=11.49.43.47 DATE=25.286
+ COMMENTS  ---+----1----+----2----+----3----+----4----+----5----+----6----+----7*         C  TIME=11.49.43.47 DATE=25.286
+ STATUS INPUT: S 1 1 1 1 1    SKILL
+ 0002 OF 0003  PCB SELECTED =           DBD SELECTED = SKILL
+ ........................................................................................................................
+ CALL=GHU      SEG=SKILL     COMND=D---
+                             FIELD=SKCLASS   OPER==       VALUE=KB750   )
+               SEG=NAME      COMND=DP--
+                             FIELD=FULNAM    OPER==       VALUE=FREIDMAN, JACK A.
+                                                                      )
+               SEG=EDUC      COMND=L---
+                             FIELD=EDUID     OPER==       VALUE=BROWN             )
+
+ SEGMENT     =(KB750   PURCHASING APPLICATIONS                                                           FREIDMAN, )
+              (JACK A.                                                                                             )
+              (          BROWN             MARKETING                                                )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         BROWN             )
+ COMMENTS                                                                                 C  TIME=11.49.43.97 DATE=25.286
+ ........................................................................................................................
+ CALL=REPL     SEG=SKILL     COMND=N---
+               SEG=NAME      COMND=N---
+               SEG=EDUC      COMND=----
+
+ SEGMENT     =(SKILL SEGMENT DATA, DON'T REPLACE!                                                        NAME SEGME)
+              (NT DATA, DON'T REPLACE EITHER!                                                                      )
+              (          BROWN             MSYSTEMS (NOW, DO REPLACE THIS ONE:)                )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         BROWN             )
+ COMMENTS                                                                                 C  TIME=11.49.43.97 DATE=25.286
+ ........................................................................................................................
+ CALL=GNP      SEG=SKILL     COMND=U---
+               SEG=NAME      COMND=U---
+               SEG=EXPR      COMND=F---
+                             FIELD=CLASSIF   OPER==       VALUE=3000)
+
+ SEGMENT     =(01A900-40461    3000)
+
+ DBPCB   LEV=03  SEG=EXPR      RET CODE=    KFDB LEN=0054
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         3000)
+ COMMENTS                                                                                 C  TIME=11.49.43.97 DATE=25.286
+ COMMENTS                ---  JUST TO VERIFY PREVIOUS REPLACE CALL  ---                   C  TIME=11.49.43.97 DATE=25.286
+ COMMENTS                                                                                 C  TIME=11.49.43.97 DATE=25.286
+ ........................................................................................................................
+ CALL=GU       SEG=SKILL     COMND=D---
+                             FIELD=SKCLASS   OPER==       VALUE=KB750   )
+               SEG=NAME      COMND=D---
+1                            FIELD=FULNAM    OPER==       VALUE=FREIDMAN, JACK A.
+                                                                      )
+               SEG=EDUC      COMND=L---
+                             FIELD=EDUID     OPER==       VALUE=BROWN             )
+
+ SEGMENT     =(KB750   PURCHASING APPLICATIONS                                                           FREIDMAN, )
+              (JACK A.                                                                                             )
+              (          BROWN             MSYSTEMS (NOW, DO REPLACE THIS ONE:)                     )
+
+ DBPCB   LEV=03  SEG=EDUC      RET CODE=    KFDB LEN=0068
+   KEY FDBK=  (KB750   FREIDMAN, JACK A.                         BROWN             )
+
+
+ STATISTIC FOR DATA BASE CALL:
+                             GU        GN       GNP       GHU       GHN      GHNP      ISRT      DLET      REPL     TOTAL
+ DL/I COUNTS BY CALL-         1         0         1         1         0         0         0         0         1         4
+ TOTAL NUMBER OF CALLS =         4  TOTAL NUMBER EQUAL COMPARES =         0  TOTAL NUMBER UNEQUAL COMPARES =         0
+
+ PSB= PSB1CBL   STOP TIME= 11.49.43.97 DATE= 25.286
+
+
+ *****************************************END OF TEST   END OF TEST   END OF TEST****************************************
+
+ ************************************************************************************************************************
+
