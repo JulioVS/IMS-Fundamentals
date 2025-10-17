@@ -1,6 +1,6 @@
-//MYDLITST  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
+//DLIIVP1J  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
 //*
-//*   IMS DL/I TEST PROGRAM 'DFSDDLT0'
+//*   IMS DL/I TEST PROGRAM 'DFSDDLT0' - READ IVPDB WITH MY OWN PSB
 //*
 //SETLIB   JCLLIB ORDER=DFSF10.PROCLIB
 //*
@@ -15,9 +15,6 @@
 //           DD DISP=SHR,DSN=DFSF10.PSBLIB                  IMS PSBs
 //           DD DISP=SHR,DSN=DFSF10.DBDLIB                  IMS DBDs
 //*
-//G.DFSIVD1  DD DISP=SHR,DSN=&SYSUID..IMS.IVPDB1      MY DATA <OSAM>
-//G.DFSIVD1I DD DISP=SHR,DSN=&SYSUID..IMS.IVPDB1I     MY KEYS <VSAM>
-//*
 //G.DFSVSAMP DD DISP=SHR,DSN=DFSF10.PROCLIB(DFSVSM00)       BUFFERS!
 //G.IEFRDER  DD DSN=&SYSUID..IMS.IMSLOG,                  MY IMS LOG
 //             DISP=(,DELETE,DELETE),
@@ -30,5 +27,5 @@ U                                                                     *
 U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
 S 1 1 1 1 1    IVPDB1
 L        GU    A1111111
-L   0005 GN
+L   0050 GN
 /*

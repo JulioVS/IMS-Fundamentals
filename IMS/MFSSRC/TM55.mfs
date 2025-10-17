@@ -1,0 +1,60 @@
+******************************************************************
+* DEFINE 'MFLD' STATEMENTS FOR "MOD" HERE
+******************************************************************
+TM55MO   MSG   TYPE=OUTPUT,SOR=(TM55DF,IGNORE),NXT=TM55MI,             X
+               OPT=2,FILL=PT
+         SEG
+         MFLD  KSKILL,LTH=8
+         MFLD  KNAME,LTH=42
+         MFLD  KEXPR,LTH=4
+         MFLD  CKEY,LTH=54
+         MFLD  EXPR,LTH=50
+         MFLD  REPLY1,LTH=50
+         MFLD  REPLY2,LTH=50
+         MFLD  (TRAN,'COBOL55') /* OR (TRAN,'PLI55') */
+         MSGEND
+******************************************************************
+* DEFINE 'MFLD' STATEMENTS FOR "MID" NEXT
+******************************************************************
+TM55MI   MSG   TYPE=INPUT,SOR=TM55DF,OPT=2,NXT=TM55MO
+         SEG
+         MFLD  TRAN,LTH=8,JUST=L,FILL=C' '
+         MFLD  KSKILL,LTH=8,JUST=L,FILL=C' '
+         MFLD  KNAME,LTH=42,JUST=L,FILL=C' '
+         MFLD  KEXPR,LTH=4
+         MSGEND
+******************************************************************
+* DEFINE 'DFLD' STATEMENTS FOR "DIF/DOF" HERE
+******************************************************************
+TM55DF   FMT
+         DEV   TYPE=(3270,2),FEAT=IGNORE,DSCA=X'15A0'
+         DIV   TYPE=INOUT
+         DPAGE CURSOR=((1,71))
+         DFLD  'TRAN CODE:',POS=(1,60),ATTR=(PROT,NOMOD),EATTR=(RED)
+TRAN     DFLD POS=(1,71),LTH=8,ATTR=(NOPROT,MOD)
+         DFLD  'EDUCATION SKILLS DATABASE',POS=(3,30),                 X
+               ATTR=(PROT,NOMOD),EATTR=(HREV,TURQ)
+         DFLD  'DISPLAY SUBSYSTEM',POS=(4,34),                         X
+               ATTR=(PROT,NOMOD),EATTR=(HREV,TURQ)
+         DFLD  'SKILL CODE:',POS=(6,5)
+KSKILL   DFLD  POS=(6,17),LTH=8
+         DFLD  '(8)',POS=(6,26)
+         DFLD  ' LAST NAME:',POS=(8,5)
+KNAME    DFLD  POS=(8,17),LTH=42
+         DFLD  '(42)',POS=(8,60)
+         DFLD  'EXPERIENCE:',POS=(10,5)
+KEXPR    DFLD  POS=(10,17),LTH=4
+         DFLD  '(4)',POS=(10,22)
+         DFLD  '<======================================================X
+               ======================>',POS=(12,2)
+         DFLD  '<======================================================X
+               ======================>',POS=(18,2)
+         DFLD  'KEY FEEDBACK',POS=(14,5)
+CKEY     DFLD  POS=(14,18),LTH=54,ATTR=(PROT,HI)
+         DFLD  'EXPR SEGMENT',POS=(16,5)
+EXPR     DFLD  POS=(16,18),LTH=50,ATTR=(PROT,HI)
+         DFLD  'MESSAGE:',POS=(20,05)
+REPLY1   DFLD POS=(20,20),LTH=50,ATTR=(PROT,HI)
+REPLY2   DFLD POS=(22,20),LTH=50,ATTR=(PROT,HI)
+         FMTEND
+         END

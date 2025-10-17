@@ -71,5 +71,6 @@
 //SYSLMOD  DD DISP=SHR,DSN=&NODE1..&SYS2.PGMLIB                         00680000
 //SYSPRINT DD SYSOUT=*                                                  00690000
 //SYSUT1   DD UNIT=SYSDA,SPACE=(CYL,(5,1))                              00700000
+//*                                                                     00715000
 //       PEND                                                           00710000
 //*                                                                     00715000
