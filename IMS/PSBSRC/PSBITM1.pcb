@@ -1,0 +1,18 @@
+*--------------------------------------------------------------------7*
+*                                                                     *
+*---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+*  #1           ALT PCB 1 (IMS TM)
+         PCB    TYPE=TP,ALTRESP=NO,SAMETRM=NO,MODIFY=YES,EXPRESS=NO
+*
+*  #2           ALT PCB 2 (IMS TM)
+         PCB    TYPE=TP,ALTRESP=NO,SAMETRM=NO,MODIFY=YES,EXPRESS=YES
+*
+*  #3           SKILL PCB (IMS DB)
+         PCB    TYPE=DB,DBDNAME=SKILL,PROCOPT=GP,KEYLEN=68
+         SENSEG NAME=SKILL,PARENT=0
+         SENSEG NAME=NAME,PARENT=SKILL
+         SENSEG NAME=EXPR,PARENT=NAME
+         SENSEG NAME=EDUC,PARENT=NAME,PROCOPT=AP
+*
+         PSBGEN LANG=COBOL,PSBNAME=PSBITM1
+         END

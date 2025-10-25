@@ -1,7 +1,7 @@
 *--------------------------------------------------------------------7*
 *                                                                     *
 *---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
-         PCB   TYPE=DB,DBDNAME=IVPDB1,PROCOPT=L,KEYLEN=10
+         PCB    TYPE=DB,DBDNAME=IVPDB1,PROCOPT=L,KEYLEN=10
          SENSEG NAME=A1111111,PARENT=0
-         PSBGEN LANG=ASSEM,PSBNAME=IVPPSL
+         PSBGEN LANG=ASSEM,PSBNAME=IVPPSBL
          END
