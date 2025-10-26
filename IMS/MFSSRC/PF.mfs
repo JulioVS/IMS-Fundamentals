@@ -1,0 +1,31 @@
+******************************************************************
+* DEFINE 'MFLD' STATEMENTS FOR "MOD" HERE
+******************************************************************
+PFMO     MSG   TYPE=OUTPUT,NXT=PFMI,SOR=(PFDF,IGNORE)
+         SEG
+         MFLD  NAME,LTH=20
+         MSGEND
+******************************************************************
+* DEFINE 'MFLD' STATEMENTS FOR "MID" NEXT
+******************************************************************
+PFMI     MSG   TYPE=INPUT,SOR=(PFDF)
+         SEG
+         MFLD  THEKEY,LTH=8
+         MFLD  NAME,LTH=20,JUST=L,FILL=C' '
+         MSGEND
+******************************************************************
+* DEFINE 'DFLD' STATEMENTS FOR "DIF/DOF" HERE
+******************************************************************
+PFDF     FMT
+         DEV   TYPE=(3270,2),FEAT=IGNORE,                              X
+               PFK=(THEKEY,'PAYROLL ','SKILLS  ','ADDRESS ')
+         DIV   TYPE=INOUT
+         DPAGE CURSOR=((2,16))
+         DFLD  'EMPLOYEE NAME',POS=(2,2,1)
+NAME     DFLD  POS=(2,16,1),LTH=20,ATTR=(,,HI)
+         DFLD  'FOR:     PRESS',POS=(6,2,1)
+         DFLD  'PAYROLL  PF1 ',POS=(8,2,1)
+         DFLD  'SKILLS   PF2 ',POS=(10,2,1)
+         DFLD  'ADDRESS  PF3 ',POS=(12,2,1)
+         FMTEND
+         END

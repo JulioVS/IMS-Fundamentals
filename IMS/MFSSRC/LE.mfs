@@ -1,0 +1,79 @@
+******************************************************************
+* DEFINE 'MFLD' STATEMENTS FOR "MOD" HERE
+******************************************************************
+LE       MSG   TYPE=OUTPUT,NXT=LE2,OPT=1,SOR=(LOC,IGNORE)
+         SEG
+         MFLD  S,LTH=6
+         MFLD  SL,LTH=2
+         MFLD  YF,LTH=2
+         MFLD  YS,LTH=2
+         MFLD  (TRAN,'LOCEMP')
+         MSGEND
+******************************************************************
+* DEFINE 'MFLD' STATEMENTS FOR "MID" NEXT
+******************************************************************
+LE2      MSG   TYPE=INPUT,SOR=(LOC),NXT=LE3
+         SEG
+         MFLD  TRAN,LTH=8,FILL=C' '
+         MFLD  S,LTH=6
+         MFLD  SL,LTH=2,JUST=R,FILL=C'0'
+         MFLD  YF,LTH=2,JUST=R,FILL=C'0'
+         MFLD  YS,LTH=2,JUST=R,FILL=C'0'
+         MFLD  'STUFF',LTH=5
+         MSGEND
+******************************************************************
+* DEFINE 'MFLD' STATEMENTS FOR "MOD" HERE
+******************************************************************
+LE3      MSG   TYPE=OUTPUT,SOR=(LST),PAGE=NO
+         SEG
+         MFLD  SK,LTH=6
+         MFLD  N1,LTH=20
+         MFLD  SER1,LTH=4
+         MFLD  DEPT1,LTH=3
+         MFLD  N2,LTH=20
+         MFLD  SER2,LTH=4
+         MFLD  DEPT2,LTH=3
+         MFLD  N3,LTH=20
+         MFLD  SER3,LTH=4
+         MFLD  DEPT3,LTH=3
+         MSGEND
+******************************************************************
+* DEFINE 'DFLD' STATEMENTS FOR "DIF/DOF" HERE
+******************************************************************
+LOC      FMT
+         DEV   TYPE=(3270,2),FEAT=IGNORE
+         DIV   TYPE=INOUT
+         DPAGE CURSOR=((2,16))
+         DFLD  'TRANSACTION =',POS=(2,2,1)
+         DFLD  'SKILL',POS=(6,2,1)
+         DFLD  'SKILL LEVEL',POS=(8,2,1)
+         DFLD  'YEARS/FIRM',POS=(10,2,1)
+         DFLD  'YEARS/SKILL',POS=(12,2,1)
+S        DFLD  POS=(6,8,1),LTH=6
+SL       DFLD  POS=(8,14,1),LTH=2
+YF       DFLD  POS=(10,14,1),LTH=2
+YS       DFLD  POS=(12,14,1),LTH=2
+TRAN     DFLD  POS=(2,16,1),LTH=8
+         FMTEND
+******************************************************************
+* DEFINE 'DFLD' STATEMENTS FOR "DOF" HERE
+******************************************************************
+LST      FMT
+         DEV   TYPE=(3270,2),FEAT=IGNORE
+         DIV   TYPE=OUTPUT
+         DFLD  'SKILL',POS=(2,12)
+         DFLD  'NAME',POS=(4,2)
+         DFLD  'SERIAL',POS=(4,24)
+         DFLD  'DEPT',POS=(4,33)
+N1       DFLD  POS=(06,02),LTH=20,ATTR=(PROT)
+SER1     DFLD  POS=(06,25),LTH=04,ATTR=(PROT)
+DEPT1    DFLD  POS=(06,34),LTH=03,ATTR=(PROT)
+N2       DFLD  POS=(08,02),LTH=20,ATTR=(PROT)
+SER2     DFLD  POS=(08,25),LTH=04,ATTR=(PROT)
+DEPT2    DFLD  POS=(08,34),LTH=03,ATTR=(PROT)
+N3       DFLD  POS=(10,02),LTH=20,ATTR=(PROT)
+SER3     DFLD  POS=(10,25),LTH=04,ATTR=(PROT)
+DEPT3    DFLD  POS=(10,34),LTH=03,ATTR=(PROT)
+SK       DFLD  POS=(02,18),LTH=06,ATTR=(PROT)
+         FMTEND
+         END

@@ -1,22 +1,21 @@
-//MYDLITST  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
+//MYDBBRUN  JOB FB3,,REGION=0M,NOTIFY=&SYSUID
 //*
-//*   IMS DL/I TEST PROGRAM 'DFSDDLT0'
+//*   IMS DL/I TEST PROGRAM 'DFSDDLT0' - 'DBB' BATCH MODE (USES ACB)
 //*
 //SETLIB   JCLLIB ORDER=DFSF10.PROCLIB
 //*
-//IMSDLI   EXEC DLIBATCH,
+//IMSDLI   EXEC DBBBATCH,
 //             MBR='DFSDDLT0',                     DL/I TEST PROGRAM
 //             PSB='IVPPSB1',                         MY OWN IVP PSB
 //             DBRC='N',                                   NO RECON!
 //             IRLM='N'                                    NO LOCKS!
 //*
-//G.IMS      DD DISP=SHR,DSN=&SYSUID..IMS.PSBLIB             MY PSBs
-//           DD DISP=SHR,DSN=&SYSUID..IMS.DBDLIB             MY DBDs
-//           DD DISP=SHR,DSN=DFSF10.PSBLIB                  IMS PSBs
-//           DD DISP=SHR,DSN=DFSF10.DBDLIB                  IMS DBDs
+//G.IMSACB   DD DISP=SHR,DSN=&SYSUID..IMS.ACBLIB             MY ACBs
+//           DD DISP=SHR,DSN=DFSF10.ACBLIB                  IMS ACBs
 //*
-//G.DFSIVD1  DD DISP=SHR,DSN=&SYSUID..IMS.IVPDB1      MY DATA <OSAM>
-//G.DFSIVD1I DD DISP=SHR,DSN=&SYSUID..IMS.IVPDB1I     MY KEYS <VSAM>
+//G.IMSACBA  DD DUMMY
+//G.IMSACBB  DD DUMMY
+//G.MODSTAT  DD DUMMY
 //*
 //G.DFSVSAMP DD DISP=SHR,DSN=DFSF10.PROCLIB(DFSVSM00)       BUFFERS!
 //G.IEFRDER  DD DSN=&SYSUID..IMS.IMSLOG,                  MY IMS LOG
@@ -30,5 +29,5 @@ U                                                                     *
 U---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
 S 1 1 1 1 1    IVPDB1
 L        GU    A1111111
-L   0005 GN
+L   0050 GN
 /*
