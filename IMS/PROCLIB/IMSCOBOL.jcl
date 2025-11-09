@@ -39,6 +39,7 @@
 //*                                                                     00385000
 //C      EXEC PGM=IGYCRCTL,REGION=4M,                                   00390000
 //        PARM='SIZE(832K),BUF(10K),LINECOUNT(50)'                      00400000
+//*                                                                     00385000
 //STEPLIB  DD DISP=SHR,DSN=&LNGPRFX..SIGYCOMP                           00410000
 //SYSLIN   DD DSN=&&LIN,DISP=(MOD,PASS),UNIT=SYSDA,                     00430000
 //            DCB=(&NODE2..&SYS2.PROCLIB),                              00440000
@@ -64,6 +65,7 @@
 //L      EXEC PGM=IEWL,REGION=4M,                                       00560000
 //            PARM='XREF,LET,LIST',                                     00570000
 //            COND=(8,LT,C)                                             00580000
+//*                                                                     00385000
 //SYSLIB   DD DISP=SHR,DSN=&NODE2..&SYS2.SDFSRESL                       00600000
 //         DD DISP=SHR,DSN=&LIBPRFX..SCEELKED                           00610000
 //SYSLIN   DD DSN=&&LIN,DISP=(OLD,DELETE)                               00620000
@@ -74,3 +76,41 @@
 //*                                                                     00715000
 //       PEND                                                           00710000
 //*                                                                     00715000
+//*                                                                     00630000
+//*
+//* NOTE:
+//*
+//*       IN THE ORIGINAL 'SYSLIN' CONCATENATION OF THE LINK STEP,
+//*       THE FOLLOWING LINE WAS PRESENT:
+//*
+//*                'DD &NODE2..&SYS2.PROCLIB(CBLTDLI)'
+//*
+//*       THIS 'CBLTDLI' MEMBER WOULD HAVE CONTAINED THE CONTROL
+//*       STATEMENTS NECESSARY TO BIND THE PROGRAM WITH DL/I SUPPORT.
+//*
+//*       HOWEVER, THIS MEMBER IS *NOT* PRESENT IN THE ZXP LIBRARIES
+//*       CAUSING THE ORIGINAL PROCEDURE TO CRASH.
+//*
+//*       THIS MEMBER IN TURN GETS GENERATED IN THE IMS INSTALLATION
+//*       BY RUNNING THE 'SDFSBASE(DFSPROCB)' JCL, AND ITS CONTENTS
+//*       WOULD HAVE BEEN:
+//*
+//*                LIBRARY SDFSRESL(CBLTDLI)     DL/I LANG INTF
+//*                LIBRARY SDFSRESL(DFHEI01)     HLPI LANG INTF
+//*                LIBRARY SDFSRESL(DFHEI1)      HLPI LANG INTF
+//*                ENTRY DLITCBL
+//*
+//*       IN THE END, I DECIDED TO REMOVE IT COMPLETELY FROM HERE, ADD
+//*       '&NODE2..&SYS2.SDFSRESL' TO THE 'SYSLIB' CARD AND PASS A
+//*       SIMILAR DIRECTIVE FROM MY OWN JOB INSTEAD, LIKE THIS:
+//*
+//*                //L.SYSIN    DD *,SYMBOLS=CNVTSYS
+//*                  INCLUDE SYSLIB(DFSLI000)
+//*                    ENTRY DLITCBL
+//*                     NAME &MYPRG(R)
+//*                /*
+//*
+//*       NOTE THAT IN THIS CONTEXT 'CBLTDLI' IS JUST AN ALIAS TO THE
+//*       ACTUAL 'DFSLI000' INTERFACE MODULE, LOCATED IN THE 'SDFSRESL'
+//*       DATA SET UNDER MANY ALIASES.
+//*

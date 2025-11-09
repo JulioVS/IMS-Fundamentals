@@ -1,0 +1,317 @@
+ /*---------------------------------------------------------------*/
+ /*               ALL PL/I CODE STARTS ON COLUMN 2!               */
+ /*-+----1----+----2----+----3----+----4----+----5----+----6----+-*/
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   PROGRAM ENTRY POINT                                         */
+ /*   - COMPLETE WHERE NECESSARY                                  */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ PLI55 : PROCEDURE  (IO_PCB_PTR,
+                     ALT_PCB_PTR,
+                     EXP_PCB_PTR,
+                     PCB_DB_SKILL_PTR)
+         OPTIONS    (MAIN) ;
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   PL/1 SPECIFIC VARIABLE DECLARATIONS AND OPTIONS             */
+ /*   - DO NOT MODIFY THIS SECTION OF CODE                        */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ DCL      PLITDLI       ENTRY ;
+ DCL      PLIXOPT       STATIC  EXTERNAL CHAR(28) VARYING
+                        INIT    ('RPTSTG(ON),STACK');
+ /* */
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   COUNTERS, SWITCHES AND OTHER VARIABLES DECLARATIONS         */
+ /*   - COMPLETE IF NECESSARY                                     */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   DL/I CALL COUNTERS                                          */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ DCL    THREE                           FIXED BIN (31,0) INIT (3) ;
+ DCL    FOUR                            FIXED BIN (31,0) INIT (4) ;
+ DCL    FIVE                            FIXED BIN (31,0) INIT (5) ;
+ DCL    SIX                             FIXED BIN (31,0) INIT (6) ;
+ DCL    SEVEN                           FIXED BIN (31,0) INIT (7) ;
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   DL/I CALL FUNCTIONS                                         */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ DCL    GU                              CHAR (04) INIT ('GU ')  ;
+ DCL    GN                              CHAR (04) INIT ('GN ')  ;
+ DCL    GNP                             CHAR (04) INIT ('GNP ') ;
+ DCL    GHU                             CHAR (04) INIT ('GHU ') ;
+ DCL    GHN                             CHAR (04) INIT ('GHN ') ;
+ DCL    GHNP                            CHAR (04) INIT ('GHNP') ;
+ DCL    REPL                            CHAR (04) INIT ('REPL') ;
+ DCL    ISRT                            CHAR (04) INIT ('ISRT') ;
+ DCL    DLET                            CHAR (04) INIT ('DLET') ;
+ DCL    ROLB                            CHAR (04) INIT ('ROLB') ;
+ DCL    CHNG                            CHAR (04) INIT ('CHNG') ;
+ DCL    PURG                            CHAR (04) INIT ('PURG') ;
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   INPUT MESSAGE SEGMENTS LAYOUT                               */
+ /*   *** DO NOT MODIFY ***                                       */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ DCL    01    INPUT_MESSAGE_SEGMENT ,
+              05 LL                     FIXED BIN   (31,0)  ,
+              05 ZZ                     CHAR        (02)    ,
+              05 TRANCODE               CHAR        (08)    ,
+              05 KSKILL                 CHAR        (08)    ,
+              05 KNAME                  CHAR        (42)    ,
+              05 KEXPR                  CHAR        (04)    ;
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   OUTPUT MESSAGE SEGMENT LAYOUT                               */
+ /*   *** DO NOT MODIFY ***                                       */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ DCL    01    OUTPUT_MESSAGE_SEGMENT ,
+              05 LL                     FIXED BIN   (31,0)  ,
+              05 ZZ                     FIXED BIN   (15,0) INIT (0) ,
+              05 KSKILL_O               CHAR        (8)     ,
+              05 KNAME_O                CHAR        (42)    ,
+              05 KEXPR_O                CHAR        (4)     ,
+              05 CKEY_O                 CHAR        (54)    ,
+              05 EXPR_O                 CHAR        (50)    ,
+              05 RESPONSE_TEXT_1        CHAR        (50)    ,
+              05 RESPONSE_TEXT_2        CHAR        (50)    ;
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   DATABASE SEGMENT LAYOUTS - USED AS IOAREAS FOR DB CALLS     */
+ /*   *** DO NOT MODIFY ***                                       */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ DCL    01    IOAREA_SKILL ,
+              05 SKCLASS                CHAR        (08)  ,
+              05 SKILL_DATA             CHAR        (82)  ;
+ /* */
+ DCL    01    IOAREA_NAME ,
+              05 FULNAM                 CHAR        (42)  ,
+              05 NAME_DATA              CHAR        (78)  ;
+ /* */
+ DCL    01    IOAREA_EXPR ,
+              05 EXPR_DATA              CHAR        (16)  ,
+              05 CLASSIF                CHAR        (04)  ;
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   SSA'S : FULLY QUALIFIED, INCLUDING NULL COMMAND CODES.      */
+ /*   *** DO NOT MODIFY ***                                       */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ DCL    01    SSA_QUAL_SKILL ,
+              05 SEGMENT_NAME         CHAR (08) INIT ('SKILL ')   ,
+              05 COMMAND_CODES_START  CHAR (01) INIT ('*')        ,
+              05 COMMAND_CODES        CHAR (04) INIT ('----')     ,
+              05 QUAL_START           CHAR (01) INIT ('(')        ,
+              05 QUAL_FIELD_NAME      CHAR (08) INIT ('SKCLASS ') ,
+              05 QUAL_OPERATOR        CHAR (02) INIT (' =')       ,
+              05 QUAL_VALUE           CHAR (08)                   ,
+              05 QUAL_END             CHAR (01) INIT (')')        ;
+ /* */
+ DCL    01    SSA_QUAL_NAME ,
+              05 SEGMENT_NAME         CHAR (08) INIT ('NAME ')    ,
+              05 COMMAND_CODES_START  CHAR (01) INIT ('*')        ,
+              05 COMMAND_CODES        CHAR (04) INIT ('----')     ,
+              05 QUAL_START           CHAR (01) INIT ('(')        ,
+              05 QUAL_FIELD_NAME      CHAR (08) INIT ('FULNAM ')  ,
+              05 QUAL_OPERATOR        CHAR (02) INIT (' =')       ,
+              05 QUAL_VALUE           CHAR (42)                   ,
+              05 QUAL_END             CHAR (01) INIT (')')        ;
+ /* */
+ DCL    01    SSA_QUAL_EXPR ,
+              05 SEGMENT_NAME         CHAR (08) INIT ('EXPR ')    ,
+              05 COMMAND_CODES_START  CHAR (01) INIT ('*')        ,
+              05 COMMAND_CODES        CHAR (04) INIT ('----')     ,
+              05 QUAL_START           CHAR (01) INIT ('(')        ,
+              05 QUAL_FIELD_NAME      CHAR (08) INIT ('CLASSIF ') ,
+              05 QUAL_OPERATOR        CHAR (02) INIT (' =')       ,
+              05 QUAL_VALUE           CHAR (04)                   ,
+              05 QUAL_END             CHAR (01) INIT (')')        ;
+ /* */
+ /*                                                               */
+ /*---------------------------------------------------------------*/
+ /*   PCB MASKS                                                   */
+ /*   - DO NOT MODIFY:                                            */
+ /*   * THE ALTERNATE TP PCBS (ALT_PCB AND EXP_PCB)               */
+ /*   * THE DB PCB (PCB_DB_SKILL)                                 */
+ /*   - CREATE REQUIRED TP PCB                                    */
+ /*   * COPY FROM MEMBER PLIOPCB AND COMPLETE IF NECESSARY        */
+ /*   * SUPPLY MISSING CODE WHERE YOU SEE AN ARROW (------->)     */
+ /*---------------------------------------------------------------*/
+ /*                                                               */
+ /* */
+ /* -------> */
+ /* */
+ DCL          IO_PCB_PTR                POINTER ;
+ /* */
+ DCL    01    IO_PCB BASED (IO_PCB_PTR) ,
+              05 IO_LTERM               CHAR        (08)    ,
+              05 IO_FILLER              CHAR        (02)    ,
+              05 IO_STATUS_CODE         CHAR        (02)    ,
+              05 IO_CURRENT_DATE        CHAR        (04)    ,
+              05 IO_CURRENT_TIME        CHAR        (04)    ,
+              05 IO_SEQ_NO              CHAR        (04)    ,
+              05 IO_MOD_NAME            CHAR        (08)    ,
+              05 IO_USERID              CHAR        (08)    ;
+ /* */
+ DCL          ALT_PCB_PTR               POINTER ;
+ /* */
+ DCL    01    ALT_PCB BASED (ALT_PCB_PTR) ,
+              05 ALT_LTERM              CHAR        (08)    ,
+              05 RESERVED               CHAR        (02)    ,
+              05 ALT_STATUS_CODE        CHAR        (02)    ;
+ /* */
+ DCL          EXP_PCB_PTR               POINTER ;
+ /* */
+ DCL    01    EXP_PCB BASED (EXP_PCB_PTR) ,
+              05 EXP_LTERM              CHAR        (08)    ,
+              05 RESERVED               CHAR        (02)    ,
+              05 EXP_STATUS_CODE        CHAR        (02)    ;
+ /* */
+ DCL          PCB_DB_SKILL_PTR          POINTER ;
+ /* */
+ DCL    01    PCB_DB_SKILL BASED (PCB_DB_SKILL_PTR) ,
+              05 DBDNAME                CHAR        (08)    ,
+              05 SEGMENT_LEVEL          CHAR        (02)    ,
+              05 STATUS_CODE            CHAR        (02)    ,
+              05 PROCOPT                CHAR        (04)    ,
+              05 RESERVED               FIXED BIN   (31,0)  ,
+              05 SEGMENT_NAME           CHAR        (08)    ,
+              05 KFBAREA_KEY_LENGTH     FIXED BIN   (31,0)  ,
+              05 NUMBER_OF_SENSEGS      FIXED BIN   (31,0)  ,
+              05 KFBAREA                CHAR        (54)    ;
+ /* */
+ /*                                                               */
+ /*===============================================================*/
+ /*   LOGIC STARTS HERE                                           */
+ /*===============================================================*/
+ /*                                                               */
+ /* */
+ GET_INPUT_MESSAGE :
+   DO UNTIL (IO_STATUS_CODE = 'QC') ;
+ /* */
+ /*                                                               */
+ /*===============================================================*/
+ /*   INSERT CODE TO GET INPUT MESSAGE                            */
+ /*   IF SUCCESSFUL, CALL PROCESS_INPUT_MESSAGE                   */
+ /*   IF NO MORE MESSAGES, GOTO PLI_END AND RETURN                */
+ /*   IF ERROR, GOTO PROCESS_UNEXPECTED_ERROR                     */
+ /*   - SUPPLY MISSING CODE WHERE YOU SEE AN ARROW (------->)     */
+ /*===============================================================*/
+ /*                                                               */
+ /* */
+ /* -------> */
+ /* */
+ GET_INPUT_MESSAGE_END:
+   END ;
+ /* */
+ /*                                                               */
+ /*===============================================================*/
+ /*   PROCESS_INPUT_MESSAGE PERFORMS THE DL/1 DB CALL AND CHECKS  */
+ /*   THE STATUS CODE FROM THE CALL                               */
+ /*   *** DO NOT MODIFY ***                                       */
+ /*===============================================================*/
+ /*                                                               */
+ /* */
+ PROCESS_INPUT_MESSAGE :
+   PROC ;
+ /* */
+   SSA_QUAL_SKILL.QUAL_VALUE  = INPUT_MESSAGE_SEGMENT.KSKILL  ;
+   SSA_QUAL_NAME.QUAL_VALUE   = INPUT_MESSAGE_SEGMENT.KNAME   ;
+   SSA_QUAL_EXPR.QUAL_VALUE   = INPUT_MESSAGE_SEGMENT.KEXPR   ;
+ /* */
+   CALL PLITDLI (SIX,
+                 GU,
+                 PCB_DB_SKILL_PTR,
+                 IOAREA_EXPR,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME,
+                 SSA_QUAL_EXPR) ;
+ /* */
+ /* CHECK STATUS CODE OF DATABASE RETREIVAL CALL */
+ /* */
+   IF PCB_DB_SKILL.STATUS_CODE = ' '
+     THEN
+       CALL GOOD_DATABASE_CALL ;
+     ELSE
+       CALL BAD_DATABASE_CALL ;
+ /* */
+ PROCESS_INPUT_MESSAGE_END :
+   END ;
+ /* */
+ /*                                                               */
+ /*===============================================================*/
+ /*   INSERT CODE FOR SUCCESSFUL CALL CONDITION NEXT              */
+ /*   - SUPPLY MISSING CODE WHERE YOU SEE AN ARROW (------->)     */
+ /*===============================================================*/
+ /*                                                               */
+ /* */
+ GOOD_DATABASE_CALL :
+   PROC ;
+ /* */
+ /* -------> */
+ /* */
+ GOOD_DATABASE_CALL_END :
+   END ;
+ /* */
+ /*                                                               */
+ /*===============================================================*/
+ /*   INSERT CODE FOR *UN*-SUCCESSFUL CALL CONDITIONS NEXT        */
+ /*   - SUPPLY MISSING CODE WHERE YOU SEE AN ARROW (------->)     */
+ /*===============================================================*/
+ /*                                                               */
+ /* */
+ BAD_DATABASE_CALL :
+   PROC ;
+ /* */
+ /* -------> */
+ /* */
+ /* */
+ BAD_DATABASE_CALL_END :
+   END ;
+ /* */
+ /*                                                               */
+ /*===============================================================*/
+ /*   ANY OTHER ERRORS USE THIS ROUTINE                           */
+ /*===============================================================*/
+ /*                                                               */
+ /* */
+ PROCESS_UNEXPECTED_ERROR:
+ /* */
+ /*                                                               */
+ /*===============================================================*/
+ /*   A NORMAL IMS/DC APPLICATION SHOULD ABEND AT THIS POINT.     */
+ /*   SINCE WE ARE IN A CLASSROOM/LAB MODE WE WILL END NORMALLY   */
+ /*   AND LOOK AT THE BTS OUTPUT FOR THE SOURCE OF OUR ERROR.     */
+ /*===============================================================*/
+ /*                                                               */
+ /* */
+ PLI_END : RETURN ;
+   END ;
+ /* */

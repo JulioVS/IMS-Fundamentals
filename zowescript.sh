@@ -5,12 +5,13 @@
 rm -r IMS
 
 # TSO/MVS LIBRARIES (PDS)
+zowe files download am "Z45864.IMS.CBLSRC"  -e ".cbl"  --po
 zowe files download am "Z45864.IMS.DBDSRC"  -e ".dbd"  --po
 zowe files download am "Z45864.IMS.DLIIN"   -e ".cntl" --po
 zowe files download am "Z45864.IMS.DLIOUT"  -e ".txt"  --po
 zowe files download am "Z45864.IMS.JCL"     -e ".jcl"  --po
 zowe files download am "Z45864.IMS.MFSSRC"  -e ".mfs"  --po
-zowe files download am "Z45864.IMS.PGMSRC"  -e ".cbl"  --po
+zowe files download am "Z45864.IMS.PLISRC"  -e ".pli"  --po
 zowe files download am "Z45864.IMS.PROCLIB" -e ".jcl"  --po
 zowe files download am "Z45864.IMS.PSBSRC"  -e ".pcb"  --po
 

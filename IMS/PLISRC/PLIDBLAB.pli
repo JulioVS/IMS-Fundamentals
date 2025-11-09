@@ -1,0 +1,774 @@
+ /*---------------------------------------------------------------*/
+ /*               ALL PL/I CODE STARTS ON COLUMN 2!               */
+ /*-+----1----+----2----+----3----+----4----+----5----+----6----+-*/
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   PROGRAM ENTRY POINT                                         */
+ /*     - COMPLETE WHERE NECESSARY                                */
+ /*---------------------------------------------------------------*/
+ /* */
+ PLI00   : PROCEDURE (SKILL_PCB_PTR, DUMMY_PCB_PTR) OPTIONS (MAIN) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   PL/1 SPECIFIC VARIABLE DECLARATIONS AND OPTIONS             */
+ /*   - DO NOT MODIFY THIS SECTION OF CODE                        */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL      PLITDLI   ENTRY ;
+ DCL      PLIXOPT   STATIC EXTERNAL CHAR(28) VARYING
+                    INIT   ('RPTSTG(ON),STACK') ;
+ ON       ENDFILE   (SYSIN) GO TO PLI_END ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   SYSIN INPUT LAYOUT                                          */
+ /*   - DO NOT MODIFY THIS SECTION OF CODE                        */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL   01   SYSIN_INPUT ,
+            05 COL1                    CHAR (01) ,
+            05 KSKILL                  CHAR (08) ,
+            05 KNAME                   CHAR (42) ,
+            05 KEXPR                   CHAR (04) ,
+            05 FILLER                  CHAR (25) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   DL/I CALL COUNTERS                                          */
+ /*     - COPY (PLICOUNT) FROM THIS LIBRARY                       */
+ /*     - ADD OTHER COUNTERS THAT WILL BE USED BY YOUR PROGRAM    */
+ /*       IN LABS 1 AND 4                                         */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL THREE                              FIXED BIN (31,0) INIT (3) ;
+ DCL FOUR                               FIXED BIN (31,0) INIT (4) ;
+ DCL FIVE                               FIXED BIN (31,0) INIT (5) ;
+ DCL SIX                                FIXED BIN (31,0) INIT (6) ;
+ DCL SEVEN                              FIXED BIN (31,0) INIT (7) ;
+ /* */
+ DCL LAB1_COUNTER                       FIXED BIN (31,0) INIT (0) ;
+ DCL LAB4_COUNTER                       FIXED BIN (31,0) INIT (0) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   DL/I CALL FUNCTIONS                                         */
+ /*     - COPY (PLIFUNC) FROM THIS LIBRARY                        */
+ /*     - COMPLETE WHERE NECESSARY                                */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL   GU                               CHAR (04) INIT ('GU ') ;
+ DCL   GN                               CHAR (04) INIT ('GN ') ;
+ DCL   GNP                              CHAR (04) INIT ('GNP ') ;
+ DCL   GHU                              CHAR (04) INIT ('GHU ') ;
+ DCL   GHN                              CHAR (04) INIT ('GNN ') ;
+ DCL   GHNP                             CHAR (04) INIT ('GHNP') ;
+ DCL   REPL                             CHAR (04) INIT ('REPL') ;
+ DCL   ISRT                             CHAR (04) INIT ('ISRT') ;
+ DCL   INIT                             CHAR (04) INIT ('INIT') ;
+ DCL   ROLB                             CHAR (04) INIT ('ROLB') ;
+ DCL   DLET                             CHAR (04) INIT ('DLET') ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   PCB POINTERS AND MASKS                                      */
+ /*     - FOR EACH PCB YOUR PROGRAM WILL REFERENCE, COPY FROM     */
+ /*       THIS LIBRARY THE PCB MASK MEMBER (PLIPCBDB)             */
+ /*     - THE MEMBER WILL CONTAIN A POINTER AND A MASK PORTION    */
+ /*       THAT WILL REQUIRE TAILORING                             */
+ /*     - FOR EACH PCB, THERE MUST BE:                            */
+ /*       1) - A DCL THAT IS A POINTER AND                        */
+ /*       2) - A DCL STRUCTURE FOR EACH CORRESPONDING MASK        */
+ /*     POINTER:                                                  */
+ /*     - SUPPLY YOUR OWN NAME THAT MATCHES A PCB NAME FROM THE   */
+ /*       'PROC' STATEMENT FOLLOWED BY THE ATTRIBUTE 'POINTER';   */
+ /*       THIS NAME WILL ALSO BE USED IN DL/1 CALLS, AND AS PART  */
+ /*       OF THE "MASK" DCL DESCRIBED BELOW.                      */
+ /*     MASK:                                                     */
+ /*     - ADD YOUR OWN 01-LEVEL NAME; FOLLOWING THE "BASED" PARM, */
+ /*       THE 01 WILL ALSO NEED TO BE COMPLETED WITH THE SAME     */
+ /*       NAME THAT WAS USED ON THE 'PROC' STATEMENT AND THE      */
+ /*       MATCHING "POINTER" DCL STATMENT DESCRIBED ABOVE         */
+ /*     - THE REST OF THE PCB MASK FOR EACH 05-LEVEL STATEMENT    */
+ /*       SHOULD BE COMPLETED AS NECESSARY.                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL   SKILL_PCB_PTR  POINTER;
+ /* */
+ DCL   01    SKILL_PCB                  BASED (SKILL_PCB_PTR) ,
+             05 DBDNAME                 CHAR             (08) ,
+             05 SEGMENT_LEVEL           CHAR             (02) ,
+             05 STATUS_CODE             CHAR             (02) ,
+             05 PROCOPT                 CHAR             (04) ,
+             05 RESERVED                FIXED BIN      (31,0) ,
+             05 SEGMENT_NAME            CHAR             (08) ,
+             05 KFBAREA_KEY_LENGTH      FIXED BIN      (31,0) ,
+             05 NUMBER_OF_SENSEGS       FIXED BIN      (31,0) ,
+             05 KFBAREA                 CHAR            (068) ;
+ /* */
+ DCL   DUMMY_PCB_PTR  POINTER;
+ /* */
+ DCL   01    DUMMY_PCB                  BASED (DUMMY_PCB_PTR) ,
+             05 DBDNAME                 CHAR             (08) ,
+             05 SEGMENT_LEVEL           CHAR             (02) ,
+             05 STATUS_CODE             CHAR             (02) ,
+             05 PROCOPT                 CHAR             (04) ,
+             05 RESERVED                FIXED BIN      (31,0) ,
+             05 SEGMENT_NAME            CHAR             (08) ,
+             05 KFBAREA_KEY_LENGTH      FIXED BIN      (31,0) ,
+             05 NUMBER_OF_SENSEGS       FIXED BIN      (31,0) ,
+             05 KFBAREA                 CHAR             (68) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   SEGMENT LAYOUTS - USED AS IOAREAS IN CALLS                  */
+ /*     - COPY FROM THIS LIBRARY MEMBERS (PLISEG__)               */
+ /*     - COMPLETE AS NECESSARY                                   */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL   01    IOAREA_EDUC ,
+             05 EDUID                   CHAR  (18) ,
+             05 EDUC_DATA               CHAR  (57) ;
+ /* */
+ DCL   01    IOAREA_EXPR ,
+             05 EXPR_DATA               CHAR  (16) ,
+             05 CLASSIF                 CHAR  (04) ;
+ /* */
+ DCL   01    IOAREA_NAME ,
+             05 FULNAM                  CHAR  (42) ,
+             05 NAME_DATA               CHAR  (78) ;
+ /* */
+ DCL   01    IOAREA_SKILL ,
+             05 SKCLASS                 CHAR  (08) ,
+             05 SKILL_DATA              CHAR  (82) ;
+ /* */
+ DCL   01    IOAREA_PATH_EXPR_4,
+             05 SKILL_SEG               CHAR  (90) ,
+             05 NAME_SEG                CHAR  (120),
+             05 EXPR_SEG                CHAR  (20) ;
+ /* */
+ DCL   01    IOAREA_PATH_EDUC_5,
+             05 SKILL_SEG               CHAR  (90) ,
+             05 NAME_SEG                CHAR  (120),
+             05 EDUC_SEG                CHAR  (75) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   SSA'S                                                       */
+ /*     - COPY FROM THIS LIBRARY MEMBERS (PLISSA__)               */
+ /*     - COMPLETE AS NECESSARY                                   */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL   01    SSA_QUAL_SKILL ,
+             05 SEGMENT_NAME            CHAR  (08)  INIT ('SKILL ') ,
+             05 COMMAND_CODES_START     CHAR  (01)  INIT ('*') ,
+             05 COMMAND_CODES           CHAR  (04)  INIT ('----') ,
+             05 QUAL_START              CHAR  (01)  INIT ('(') ,
+             05 QUAL_FIELD_NAME         CHAR  (08)  INIT ('SKCLASS ') ,
+             05 QUAL_OPERATOR           CHAR  (02)  INIT (' =') ,
+             05 QUAL_VALUE              CHAR  (08)  ,
+             05 QUAL_END                CHAR  (01)  INIT (')') ;
+ /* */
+ DCL   01    SSA_QUAL_NAME ,
+             05 SEGMENT_NAME            CHAR  (08)  INIT ('NAME ') ,
+             05 COMMAND_CODES_START     CHAR  (01)  INIT ('*') ,
+             05 COMMAND_CODES           CHAR  (04)  INIT ('----') ,
+             05 QUAL_START              CHAR  (01)  INIT ('(') ,
+             05 QUAL_FIELD_NAME         CHAR  (08)  INIT ('FULNAM ') ,
+             05 QUAL_OPERATOR           CHAR  (02)  INIT (' =') ,
+             05 QUAL_VALUE              CHAR  (42)  ,
+             05 QUAL_END                CHAR  (01)  INIT (')') ;
+ /* */
+ DCL   01    SSA_QUAL_EXPR ,
+             05 SEGMENT_NAME            CHAR  (08)  INIT ('EXPR ') ,
+             05 COMMAND_CODES_START     CHAR  (01)  INIT ('*') ,
+             05 COMMAND_CODES           CHAR  (04)  INIT ('----') ,
+             05 QUAL_START              CHAR  (01)  INIT ('(') ,
+             05 QUAL_FIELD_NAME         CHAR  (08)  INIT ('CLASSIF ') ,
+             05 QUAL_OPERATOR           CHAR  (02)  INIT (' =') ,
+             05 QUAL_VALUE              CHAR  (04)  ,
+             05 QUAL_END                CHAR  (01)  INIT (')') ;
+ /* */
+ DCL   01    SSA_QUAL_EDUC ,
+             05 SEGMENT_NAME            CHAR  (08)  INIT ('EDUC ') ,
+             05 COMMAND_CODES_START     CHAR  (01)  INIT ('*') ,
+             05 COMMAND_CODES           CHAR  (04)  INIT ('----') ,
+             05 QUAL_START              CHAR  (01)  INIT ('(') ,
+             05 QUAL_FIELD_NAME         CHAR  (08)  INIT ('EDUID ') ,
+             05 QUAL_OPERATOR           CHAR  (02)  INIT (' =') ,
+             05 QUAL_VALUE              CHAR  (18)  ,
+             05 QUAL_END                CHAR  (01)  INIT (')') ;
+ /* */
+ DCL 01 SSA_QUAL_EDUC_5,
+             05 SEGMENT_NAME            CHAR  (08)  INIT ('EDUC ') ,
+             05 COMMAND_CODES_START     CHAR  (01)  INIT ('*') ,
+             05 COMMAND_CODES           CHAR  (04)  INIT ('----') ,
+             05 QUAL_START              CHAR  (01)  INIT ('(') ,
+             05 EDUC_CONCAT_KEY_5,
+                10 SKILL_KEY            CHAR  (08)  ,
+                10 NAME_KEY             CHAR  (42)  ,
+                10 EDUC_KEY             CHAR  (18)  ,
+             05 QUAL_END                CHAR  (01)  INIT (')') ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   READ SYSIN INPUT                                            */
+ /*   - DO NOT MODIFY THIS SECTION OF CODE                        */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ READ_SYSIN_INPUT :
+ /* */
+ READ FILE (SYSIN) INTO (SYSIN_INPUT) ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '*'
+    THEN GO TO READ_SYSIN_INPUT ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '1'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 1 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '2'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 2 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '4'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 4 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '5'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 5 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*******  SYSIN INPUT FOLLOWS *************')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT (SYSIN_INPUT)
+          (SKIP(1), A(01), A(08), A(42), A(04), A(25)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'E'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*              END OF OUTPUT             *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO PLI_END ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'G'
+    THEN CALL LAB1 ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'U'
+    THEN CALL LAB2 ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'C'
+    THEN CALL LAB4 ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'O'
+    THEN CALL LAB5 ;
+ /* */
+ /* */
+ GO TO READ_SYSIN_INPUT ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 1                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB1  :  PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 1 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+    SSA_QUAL_SKILL.QUAL_VALUE = SYSIN_INPUT.KSKILL ;
+    SSA_QUAL_NAME.QUAL_VALUE  = SYSIN_INPUT.KNAME ;
+ /* */
+    CALL PLITDLI(FIVE,
+                 GU,
+                 SKILL_PCB_PTR,
+                 IOAREA_NAME,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME);
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             PUT EDIT ('KFBAREA_KEY_LENGTH OF SKILL_PCB = ',
+                        SKILL_PCB.KFBAREA_KEY_LENGTH)
+                      (SKIP(1), A(34), F(04)) ;
+             PUT EDIT ('KFBAREA            OF SKILL_PCB = ',
+                        SKILL_PCB.KFBAREA)
+                      (SKIP(1), A(34), A(68)) ;
+             LAB1_COUNTER = 0 ;
+             CALL LAB1_GNP ;
+             PUT EDIT ('LAB1_COUNTER,                   = ',
+                        LAB1_COUNTER)
+                      (SKIP(1), A(34), F(04)) ;
+          END ;
+       ELSE
+          DO ;
+             CALL ERROR_ROUTINE ;
+          END ;
+ /* */
+ LAB1_END : END LAB1 ;
+ /* */
+ LAB1_GNP : PROCEDURE ;
+ /* */
+ LAB1_GNP_LOOP : CALL PLITDLI(THREE,
+                              GNP,
+                              SKILL_PCB_PTR,
+                              IOAREA_EDUC);
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' ' | SKILL_PCB.STATUS_CODE = 'GK'
+       THEN
+          DO ;
+             LAB1_COUNTER = LAB1_COUNTER + 1 ;
+             GO TO LAB1_GNP_LOOP ;
+          END ;
+       ELSE
+          IF SKILL_PCB.STATUS_CODE = 'GE'
+             THEN
+                DO ;
+                   GO TO LAB1_GNP_LOOP_END ;
+                END ;
+             ELSE
+                DO ;
+                   CALL ERROR_ROUTINE ;
+                   GO TO LAB1_GNP_LOOP_END ;
+                END ;
+ /* */
+ LAB1_GNP_LOOP_END : END LAB1_GNP ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 2                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB2     : PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 2 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+    IOAREA_EDUC.EDUID         = 'U3717'                      ;
+    IOAREA_EDUC.EDUC_DATA     = 'INSERT  OF EDUC SUCCESSFUL' ;
+    SSA_QUAL_SKILL.QUAL_VALUE = SYSIN_INPUT.KSKILL           ;
+    SSA_QUAL_NAME.QUAL_VALUE  = SYSIN_INPUT.KNAME            ;
+    SSA_QUAL_EDUC.QUAL_START  = ' '                          ;
+ /* */
+    CALL PLITDLI(SIX,
+                 ISRT,
+                 SKILL_PCB_PTR,
+                 IOAREA_EDUC,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME,
+                 SSA_QUAL_EDUC);
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             PUT EDIT ('KFBAREA_KEY_LENGTH OF SKILL_PCB = ',
+                        SKILL_PCB.KFBAREA_KEY_LENGTH)
+                      (SKIP(1), A(34), F(04)) ;
+             PUT EDIT ('KFBAREA            OF SKILL_PCB = ',
+                        SKILL_PCB.KFBAREA)
+                      (SKIP(1), A(34), A(68)) ;
+          END ;
+       ELSE
+          DO ;
+             CALL ERROR_ROUTINE ;
+             GO TO LAB2_END ;
+          END ;
+ /* */
+    SSA_QUAL_EDUC.QUAL_START  = '(' ;
+    SSA_QUAL_EDUC.QUAL_VALUE  = 'U3717' ;
+ /* */
+    CALL PLITDLI(SIX,
+                 GHU,
+                 SKILL_PCB_PTR,
+                 IOAREA_EDUC,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME,
+                 SSA_QUAL_EDUC);
+
+
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             PUT EDIT ('THE EDUC SEG JUST INSERTED IS   = ',
+                        IOAREA_EDUC)
+                      (SKIP(1), A(34), A(18), A(57)) ;
+          END ;
+       ELSE
+          DO ;
+             CALL ERROR_ROUTINE ;
+             GO TO LAB2_END ;
+          END ;
+ /* */
+    IOAREA_EDUC.EDUC_DATA     = 'REPLACE OF EDUC SUCCESSFUL' ;
+ /* */
+    CALL PLITDLI(THREE,
+                 REPL,
+                 SKILL_PCB_PTR,
+                 IOAREA_EDUC) ;
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             PUT EDIT ('THE EDUC SEG JUST REPLACED IS   = ',
+                        IOAREA_EDUC)
+                      (SKIP(1), A(34), A(18), A(57)) ;
+          END ;
+       ELSE
+          DO ;
+            CALL ERROR_ROUTINE ;
+            GO TO LAB2_END ;
+          END ;
+ /* */
+    IOAREA_EDUC.EDUC_DATA     = 'DELETE  OF EDUC SUCCESSFUL' ;
+ /* */
+    CALL PLITDLI(THREE,
+                 DLET,
+                 SKILL_PCB_PTR,
+                 IOAREA_EDUC) ;
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             PUT EDIT ('THE EDUC SEG JUST DELETED  IS   = ',
+                        IOAREA_EDUC)
+                      (SKIP(1), A(34), A(18), A(57)) ;
+
+          END ;
+       ELSE
+          DO ;
+             CALL ERROR_ROUTINE ;
+             GO TO LAB2_END ;
+          END ;
+ /* */
+ LAB2_END : END LAB2 ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 4                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB4     : PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 4 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+    SSA_QUAL_SKILL.QUAL_START    = '('                ;
+    SSA_QUAL_SKILL.QUAL_VALUE    = SYSIN_INPUT.KSKILL ;
+    SSA_QUAL_NAME.COMMAND_CODES  = 'P---'             ;
+    SSA_QUAL_NAME.QUAL_START     = '('                ;
+    SSA_QUAL_NAME.QUAL_VALUE     = SYSIN_INPUT.KNAME  ;
+    SSA_QUAL_EDUC.QUAL_START     = '('                ;
+    SSA_QUAL_EDUC.QUAL_VALUE     = 'HARVARD'          ;
+ /* */
+    CALL PLITDLI(SIX,
+                 GU,
+                 SKILL_PCB_PTR,
+                 IOAREA_EDUC,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME,
+                 SSA_QUAL_EDUC);
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             PUT EDIT ('KFBAREA_KEY_LENGTH OF SKILL_PCB  = ',
+                        SKILL_PCB.KFBAREA_KEY_LENGTH)
+                      (SKIP(1), A(35), F(04)) ;
+             PUT EDIT ('KFBAREA            OF SKILL_PCB  = ',
+                        SKILL_PCB.KFBAREA)
+                      (SKIP(1), A(35), A(68)) ;
+             PUT EDIT ('EDUC SEG           OF HARVARD IS = ',
+                        IOAREA_EDUC)
+                      (SKIP(1), A(35), A(75)) ;
+             LAB4_COUNTER = '0' ;
+          END ;
+       ELSE
+          DO ;
+             CALL ERROR_ROUTINE ;
+             GO TO LAB4_END ;
+          END ;
+ /* */
+    SSA_QUAL_SKILL.COMMAND_CODES = 'D---' ;
+    SSA_QUAL_SKILL.QUAL_START    = ' '    ;
+    SSA_QUAL_NAME.COMMAND_CODES  = 'DV--' ;
+    SSA_QUAL_NAME.QUAL_START     = ' '    ;
+    SSA_QUAL_EXPR.COMMAND_CODES  = 'F---' ;
+    SSA_QUAL_EXPR.QUAL_START     = ' '    ;
+ /* */
+    CALL PLITDLI(SIX,
+                 GNP,
+                 SKILL_PCB_PTR,
+                 IOAREA_PATH_EXPR_4,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME,
+                 SSA_QUAL_EXPR);
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             LAB4_COUNTER = LAB4_COUNTER + 1 ;
+             CALL LAB4_GNP ;
+             PUT EDIT ('LAB4_COUNTER                     = ',
+                        LAB4_COUNTER)
+                      (SKIP(1), A(35), F(04)) ;
+          END ;
+       ELSE
+          DO ;
+             CALL ERROR_ROUTINE ;
+             GO TO LAB4_END ;
+          END ;
+ /* */
+ LAB4_END : END LAB4 ;
+ /* */
+ LAB4_GNP : PROCEDURE ;
+    SSA_QUAL_EXPR.COMMAND_CODES  = '----' ;
+    SSA_QUAL_EXPR.QUAL_START     = ' '    ;
+ /* */
+ LAB4_GNP_LOOP : CALL PLITDLI(FOUR,
+                              GNP,
+                              SKILL_PCB_PTR,
+                              IOAREA_EXPR,
+                              SSA_QUAL_EXPR);
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             LAB4_COUNTER = LAB4_COUNTER + 1 ;
+             GO TO LAB4_GNP_LOOP ;
+          END ;
+       ELSE
+          IF SKILL_PCB.STATUS_CODE = 'GE'
+             THEN
+                DO ;
+                   GO TO LAB4_GNP_END ;
+                END ;
+             ELSE
+                DO ;
+                   CALL ERROR_ROUTINE ;
+                   GO TO LAB4_GNP_END ;
+                END ;
+ /* */
+ LAB4_GNP_END : END LAB4_GNP ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 5                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB5     : PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 5 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+    SSA_QUAL_SKILL.COMMAND_CODES    = 'D---'             ;
+    SSA_QUAL_SKILL.QUAL_START       = ' '                ;
+    SSA_QUAL_NAME.COMMAND_CODES     = 'DP--'             ;
+    SSA_QUAL_NAME.QUAL_START        = ' '                ;
+    SSA_QUAL_EDUC_5.COMMAND_CODES   = 'LC--'             ;
+    SSA_QUAL_EDUC_5.QUAL_START      = '('                ;
+    SSA_QUAL_EDUC_5.SKILL_KEY       = SYSIN_INPUT.KSKILL ;
+    SSA_QUAL_EDUC_5.NAME_KEY        = SYSIN_INPUT.KNAME  ;
+    SSA_QUAL_EDUC_5.EDUC_KEY        = 'BROWN'            ;
+ /* */
+    CALL PLITDLI(SIX,
+                 GHU,
+                 SKILL_PCB_PTR,
+                 IOAREA_PATH_EDUC_5,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME,
+                 SSA_QUAL_EDUC_5);
+ /* */
+    IF SKILL_PCB.STATUS_CODE = ' '
+       THEN
+          DO ;
+             PUT EDIT ('KFBAREA_KEY_LENGTH OF SKILL_PCB   = ',
+                        SKILL_PCB.KFBAREA_KEY_LENGTH)
+                      (SKIP(1), A(36), F(04)) ;
+             PUT EDIT ('KFBAREA            OF SKILL_PCB   = ',
+                        SKILL_PCB.KFBAREA)
+                      (SKIP(1), A(36), A(68)) ;
+          END ;
+       ELSE
+          DO ;
+             CALL ERROR_ROUTINE ;
+             GO TO LAB5_END ;
+          END ;
+ /* */
+    SSA_QUAL_SKILL.COMMAND_CODES = 'N---' ;
+    SSA_QUAL_SKILL.QUAL_START    = ' '    ;
+    SSA_QUAL_NAME.COMMAND_CODES  = 'N---' ;
+    SSA_QUAL_NAME.QUAL_START     = ' '    ;
+    IOAREA_PATH_EDUC_5.SKILL_SEG = ' '    ;
+    IOAREA_PATH_EDUC_5.NAME_SEG  = ' '    ;
+    IOAREA_PATH_EDUC_5.EDUC_SEG
+       = 'BROWN             REPLACE OF EDUC SUCCESSFUL' ;
+ /* */
+    CALL PLITDLI(FIVE,
+                 REPL,
+                 SKILL_PCB_PTR,
+                 IOAREA_PATH_EDUC_5,
+                 SSA_QUAL_SKILL,
+                 SSA_QUAL_NAME);
+ /* */
+   IF SKILL_PCB.STATUS_CODE = ' '
+      THEN
+         DO ;
+            PUT EDIT ('LAST EDUC SEG OF BROWN AFTER REPL = ',
+                       IOAREA_PATH_EDUC_5.EDUC_SEG)
+                     (SKIP(1), A(36), A(75)) ;
+         END ;
+      ELSE
+         DO ;
+            CALL ERROR_ROUTINE ;
+            GO TO LAB5_END ;
+         END ;
+ /* */
+    SSA_QUAL_NAME.COMMAND_CODES  = 'V---' ;
+    SSA_QUAL_NAME.QUAL_START     = ' '    ;
+    SSA_QUAL_EXPR.COMMAND_CODES  = 'FL--' ;
+    SSA_QUAL_EXPR.QUAL_START     = '('    ;
+    SSA_QUAL_EXPR.QUAL_VALUE     = '3000' ;
+ /* */
+    CALL PLITDLI(FIVE,
+                 GNP,
+                 SKILL_PCB_PTR,
+                 IOAREA_EXPR,
+                 SSA_QUAL_NAME,
+                 SSA_QUAL_EXPR);
+ /* */
+   IF SKILL_PCB.STATUS_CODE = ' '
+      THEN
+         DO ;
+            PUT EDIT ('LAST EXPR SEG OF 3000 IS          = ',
+                       IOAREA_EXPR)
+                     (SKIP(1), A(36), A(16), A(04)) ;
+         END ;
+      ELSE
+         IF SKILL_PCB.STATUS_CODE = 'GE'
+            THEN
+               DO ;
+                  GO TO LAB5_END ;
+               END ;
+            ELSE
+               DO ;
+                  CALL ERROR_ROUTINE ;
+                  GO TO LAB5_END ;
+               END ;
+ /* */
+ LAB5_END : END LAB5 ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   ERROR ROUTINE                                               */
+ /*     - COMPLETE WITH YOUR PCBNAME(S) AS REQUIRED. IN THIS      */
+ /*       EXAMPLE, THE 01 LEVEL NAME FOR THE PCB IS 'SKILL_PCB'   */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ ERROR_ROUTINE : PROCEDURE ;
+ /* */
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*******  ERROR ROUTINE START  ************')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('DBDNAME            = ', SKILL_PCB.DBDNAME)
+          (SKIP(1), A(21), A(08)) ;
+ PUT EDIT ('SEGMENT_LEVEL      = ', SKILL_PCB.SEGMENT_LEVEL)
+          (SKIP(1), A(21), A(02)) ;
+ PUT EDIT ('STATUS_CODE        = ', SKILL_PCB.STATUS_CODE)
+          (SKIP(1), A(21), A(02)) ;
+ PUT EDIT ('PROCOPT            = ', SKILL_PCB.PROCOPT)
+          (SKIP(1), A(21), A(04)) ;
+ PUT EDIT ('RESERVED           = ', SKILL_PCB.RESERVED)
+          (SKIP(1), A(21), F(04)) ;
+ PUT EDIT ('SEGMENT_NAME       = ', SKILL_PCB.SEGMENT_NAME)
+          (SKIP(1), A(21), A(08)) ;
+ PUT EDIT ('KFBAREA_KEY_LENGTH = ', SKILL_PCB.KFBAREA_KEY_LENGTH)
+          (SKIP(1), A(21), F(04)) ;
+ PUT EDIT ('NUMBER_OF_SENSEGS  = ', SKILL_PCB.NUMBER_OF_SENSEGS)
+          (SKIP(1), A(21), F(04)) ;
+ PUT EDIT ('KFBAREA            = ', SKILL_PCB.KFBAREA)
+          (SKIP(1), A(21), A(68)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*******  ERROR ROUTINE END    ************')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ /* */
+ ERROR_ROUTINE_END : END ERROR_ROUTINE ;
+ /* */
+ PLI_END : RETURN ;
+ END ;
+ /* */

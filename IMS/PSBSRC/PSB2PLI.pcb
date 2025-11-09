@@ -1,0 +1,17 @@
+*--------------------------------------------------------------------7*
+*                                                                     *
+*---+----1----+----2----+----3----+----4----+----5----+----6----+----7*
+         PCB    TYPE=DB,DBDNAME=DUMMY,PROCOPT=GP,KEYLEN=68
+         SENSEG NAME=DUMMY1,PARENT=0
+         SENSEG NAME=DUMMY2,PARENT=DUMMY1
+         SENSEG NAME=DUMMY5,PARENT=DUMMY2
+         SENSEG NAME=DUMMY6,PARENT=DUMMY2
+*
+         PCB    TYPE=DB,DBDNAME=SKILL,PROCOPT=GP,KEYLEN=68
+         SENSEG NAME=SKILL,PARENT=0
+         SENSEG NAME=NAME,PARENT=SKILL
+         SENSEG NAME=EXPR,PARENT=NAME
+         SENSEG NAME=EDUC,PARENT=NAME,PROCOPT=AP
+*
+         PSBGEN LANG=PL/I,PSBNAME=PSB2PLI,CMPAT=YES
+         END

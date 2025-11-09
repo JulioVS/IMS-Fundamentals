@@ -1,0 +1,326 @@
+ /*---------------------------------------------------------------*/
+ /*               ALL PL/I CODE STARTS ON COLUMN 2!               */
+ /*-+----1----+----2----+----3----+----4----+----5----+----6----+-*/
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   PROGRAM ENTRY POINT                                         */
+ /*     - COMPLETE WHERE NECESSARY                                */
+ /*---------------------------------------------------------------*/
+ /* */
+ PLI00   : PROCEDURE (SKILL_PCB_PTR               ) OPTIONS (MAIN) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   PL/1 SPECIFIC VARIABLE DECLARATIONS AND OPTIONS             */
+ /*   - DO NOT MODIFY THIS SECTION OF CODE                        */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL      PLITDLI   ENTRY ;
+ DCL      PLIXOPT   STATIC EXTERNAL CHAR(28) VARYING
+                    INIT   ('RPTSTG(ON),STACK') ;
+ ON       ENDFILE   (SYSIN) GO TO PLI_END ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   SYSIN INPUT LAYOUT                                          */
+ /*   - DO NOT MODIFY THIS SECTION OF CODE                        */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL   01   SYSIN_INPUT ,
+            05 COL1                    CHAR (01) ,
+            05 KSKILL                  CHAR (08) ,
+            05 KNAME                   CHAR (42) ,
+            05 KEXPR                   CHAR (04) ,
+            05 FILLER                  CHAR (25) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   DL/I CALL COUNTERS                                          */
+ /*     - COPY (PLICOUNT) FROM THIS LIBRARY                       */
+ /*     - ADD OTHER COUNTERS THAT WILL BE USED BY YOUR PROGRAM    */
+ /*       IN LABS 1 AND 4                                         */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   DL/I CALL FUNCTIONS                                         */
+ /*     - COPY (PLIFUNC) FROM THIS LIBRARY                        */
+ /*     - COMPLETE WHERE NECESSARY                                */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   PCB POINTERS AND MASKS                                      */
+ /*     - FOR EACH PCB YOUR PROGRAM WILL REFERENCE, COPY FROM     */
+ /*       THIS LIBRARY THE PCB MASK MEMBER (PLIPCBDB)             */
+ /*     - THE MEMBER WILL CONTAIN A POINTER AND A MASK PORTION    */
+ /*       THAT WILL REQUIRE TAILORING                             */
+ /*     - FOR EACH PCB, THERE MUST BE:                            */
+ /*       1) - A DCL THAT IS A POINTER AND                        */
+ /*       2) - A DCL STRUCTURE FOR EACH CORRESPONDING MASK        */
+ /*     POINTER:                                                  */
+ /*     - SUPPLY YOUR OWN NAME THAT MATCHES A PCB NAME FROM THE   */
+ /*       'PROC' STATEMENT FOLLOWED BY THE ATTRIBUTE 'POINTER';   */
+ /*       THIS NAME WILL ALSO BE USED IN DL/1 CALLS, AND AS PART  */
+ /*       OF THE "MASK" DCL DESCRIBED BELOW.                      */
+ /*     MASK:                                                     */
+ /*     - ADD YOUR OWN 01-LEVEL NAME; FOLLOWING THE "BASED" PARM, */
+ /*       THE 01 WILL ALSO NEED TO BE COMPLETED WITH THE SAME     */
+ /*       NAME THAT WAS USED ON THE 'PROC' STATEMENT AND THE      */
+ /*       MATCHING "POINTER" DCL STATMENT DESCRIBED ABOVE         */
+ /*     - THE REST OF THE PCB MASK FOR EACH 05-LEVEL STATEMENT    */
+ /*       SHOULD BE COMPLETED AS NECESSARY.                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ DCL   SKILL_PCB_PTR  POINTER;
+ /* */
+ DCL   01    SKILL_PCB                  BASED (SKILL_PCB_PTR) ,
+             05 DBDNAME                 CHAR             (08) ,
+             05 SEGMENT_LEVEL           CHAR             (02) ,
+             05 STATUS_CODE             CHAR             (02) ,
+             05 PROCOPT                 CHAR             (04) ,
+             05 RESERVED                FIXED BIN      (31,0) ,
+             05 SEGMENT_NAME            CHAR             (08) ,
+             05 KFBAREA_KEY_LENGTH      FIXED BIN      (31,0) ,
+             05 NUMBER_OF_SENSEGS       FIXED BIN      (31,0) ,
+             05 KFBAREA                 CHAR            (068) ;
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   SEGMENT LAYOUTS - USED AS IOAREAS IN CALLS                  */
+ /*     - COPY FROM THIS LIBRARY MEMBERS (PLISEG__)               */
+ /*     - COMPLETE AS NECESSARY                                   */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   SSA'S                                                       */
+ /*     - COPY FROM THIS LIBRARY MEMBERS (PLISSA__)               */
+ /*     - COMPLETE AS NECESSARY                                   */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   READ SYSIN INPUT                                            */
+ /*   - DO NOT MODIFY THIS SECTION OF CODE                        */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ READ_SYSIN_INPUT :
+ /* */
+ READ FILE (SYSIN) INTO (SYSIN_INPUT) ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '*'
+    THEN GO TO READ_SYSIN_INPUT ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '1'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 1 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '2'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 2 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '4'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 4 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = '5'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*        LAB 5 OUTPUT STARTS HERE        *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO READ_SYSIN_INPUT ;
+    END ;
+ /* */
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*******  SYSIN INPUT FOLLOWS *************')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT (SYSIN_INPUT)
+          (SKIP(1), A(01), A(08), A(42), A(04), A(25)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'E'
+    THEN DO ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*              END OF OUTPUT             *')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('******************************************')
+               (SKIP(1), A(42)) ;
+      PUT EDIT ('*')
+               (SKIP(1), A(42)) ;
+      GO TO PLI_END ;
+    END ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'G'
+    THEN CALL LAB1 ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'U'
+    THEN CALL LAB2 ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'C'
+    THEN CALL LAB4 ;
+ /* */
+ IF SYSIN_INPUT.COL1 = 'O'
+    THEN CALL LAB5 ;
+ /* */
+ /* */
+ GO TO READ_SYSIN_INPUT ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 1                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB1  :  PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 1 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+ /* */
+ LAB1_END : END LAB1 ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 2                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB2     : PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 2 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+ /* */
+ LAB2_END : END LAB2 ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 4                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB4     : PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 4 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+ /* */
+ LAB4_END : END LAB4 ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   LAB 5                                                       */
+ /*---------------------------------------------------------------*/
+ /* */
+ LAB5     : PROCEDURE ;
+ /* */
+ /*****************************************************************/
+ /*   LAB 5 LOGIC GOES HERE.                                      */
+ /*    - IN CASE OF ERROR, USE THE ERROR ROUTINE                  */
+ /*      AT THE END OF THIS PROGRAM                               */
+ /*****************************************************************/
+ /* */
+ /* */
+ LAB5_END : END LAB5 ;
+ /* */
+ /* */
+ /*---------------------------------------------------------------*/
+ /*   ERROR ROUTINE                                               */
+ /*     - COMPLETE WITH YOUR PCBNAME(S) AS REQUIRED. IN THIS      */
+ /*       EXAMPLE, THE 01 LEVEL NAME FOR THE PCB IS 'SKILL_PCB'   */
+ /*---------------------------------------------------------------*/
+ /* */
+ /* */
+ ERROR_ROUTINE : PROCEDURE ;
+ /* */
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*******  ERROR ROUTINE START  ************')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('DBDNAME            = ', SKILL_PCB.DBDNAME)
+          (SKIP(1), A(21), A(08)) ;
+ PUT EDIT ('SEGMENT_LEVEL      = ', SKILL_PCB.SEGMENT_LEVEL)
+          (SKIP(1), A(21), A(02)) ;
+ PUT EDIT ('STATUS_CODE        = ', SKILL_PCB.STATUS_CODE)
+          (SKIP(1), A(21), A(02)) ;
+ PUT EDIT ('PROCOPT            = ', SKILL_PCB.PROCOPT)
+          (SKIP(1), A(21), A(04)) ;
+ PUT EDIT ('RESERVED           = ', SKILL_PCB.RESERVED)
+          (SKIP(1), A(21), F(04)) ;
+ PUT EDIT ('SEGMENT_NAME       = ', SKILL_PCB.SEGMENT_NAME)
+          (SKIP(1), A(21), A(08)) ;
+ PUT EDIT ('KFBAREA_KEY_LENGTH = ', SKILL_PCB.KFBAREA_KEY_LENGTH)
+          (SKIP(1), A(21), F(04)) ;
+ PUT EDIT ('NUMBER_OF_SENSEGS  = ', SKILL_PCB.NUMBER_OF_SENSEGS)
+          (SKIP(1), A(21), F(04)) ;
+ PUT EDIT ('KFBAREA            = ', SKILL_PCB.KFBAREA)
+          (SKIP(1), A(21), A(68)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*******  ERROR ROUTINE END    ************')
+          (SKIP(1), A(42)) ;
+ PUT EDIT ('*')
+          (SKIP(1), A(42)) ;
+ /* */
+ ERROR_ROUTINE_END : END ERROR_ROUTINE ;
+ /* */
+ PLI_END : RETURN ;
+ END ;
+ /* */
